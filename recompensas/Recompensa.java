@@ -8,7 +8,7 @@ public abstract class Recompensa {
     protected int costo;
     protected String tipo;
 
-    public Recompensa(String nombre, String descripcion, int costo, String tipo) {
+    public Recompensa(String nombre, int costo, String tipo) {
         this.nombre = nombre;
         this.costo = costo;
         this.tipo = tipo;
