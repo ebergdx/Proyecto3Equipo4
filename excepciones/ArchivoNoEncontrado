@@ -1,0 +1,9 @@
+package excepciones;
+
+import java.io.IOException;
+
+public class ArchivoNoEncontrado extends IOException {
+    public ArchivoNoEncontrado() {
+        System.out.println("Excepción: No se encontró el archivo.");
+    }
+}
