@@ -2,35 +2,18 @@ package tareas;
 
 import java.io.Serializable;
 
-public class Habito implements Serializable {
-    private String nombre;
-    private String info;
+public class Habito extends Tareas implements Serializable {
     private String frecuencia;
-    private String categoria;
     private short racha;
 
-    public Habito(String nombre, String info, String frecuencia, String categoria, short racha) {
-        this.nombre = nombre;
-        this.info = info;
+    public Habito(String titulo, String info, String frecuencia, String categoria, short racha) {
+        super(titulo, info, categoria, null);
         this.frecuencia = frecuencia;
-        this.categoria = categoria;
         this.racha = racha;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getInfo() {
-        return info;
     }
 
     public String getFrecuencia() {
         return frecuencia;
-    }
-    
-    public String getCategoria() {
-        return categoria;
     }
 
     public short getRacha() {
@@ -43,14 +26,23 @@ public class Habito implements Serializable {
 
     public void resetRacha() {
         this.racha = 0;
-    }    
+    }
+
+    @Override
+    public void mostrarInfo() {
+        System.out.println("Información del hábito: " + titulo);
+        System.out.println("Descripción: " + info);
+        System.out.println("Frecuencia: " + frecuencia);
+        System.out.println("Categoría: " + categoria);
+        System.out.println("Racha de días: " + racha);
+    }
 
     @Override
     public String toString() {
-        return "\tInformación del hábito " + nombre +
-        "| Descripción: " + info +
-        "| Frecuencia: " + frecuencia +
-        "| Categoria: " + categoria +
-        "| Racha de Días: " + racha;
+        return "\tInformación del hábito " + titulo +
+        " | Descripción: " + info +
+        " | Frecuencia: " + frecuencia +
+        " | Categoría: " + categoria +
+        " | Racha de días: " + racha;
     }
 }
