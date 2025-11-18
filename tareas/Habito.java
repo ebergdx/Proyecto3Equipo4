@@ -16,6 +16,10 @@ public class Habito extends Tareas implements Serializable {
         return frecuencia;
     }
 
+    public void setFrecuencia(String frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
     public short getRacha() {
         return racha;
     }
@@ -26,6 +30,18 @@ public class Habito extends Tareas implements Serializable {
 
     public void resetRacha() {
         this.racha = 0;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     @Override

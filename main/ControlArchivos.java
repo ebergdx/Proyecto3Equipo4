@@ -15,13 +15,31 @@ public class ControlArchivos {
 
     public static void guardarClientes(ArrayList<Usuario> usuarios) {
         try {
-            OutputStream is = new FileOutputStream(CLIENTES_REGISTRO);
-            ObjectOutputStream oos = new ObjectOutputStream(is);
+            OutputStream os = new FileOutputStream(CLIENTES_REGISTRO);
+            ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(usuarios);
             oos.close();
+            os.close();
         } catch(IOException e) {
             System.out.println("Excepción: Usuarios no almacenados correctamente.");
         }
+    }
+
+    public static ArrayList<Usuario> cargarClientes() {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        try {
+            InputStream is = new FileInputStream(CLIENTES_REGISTRO);
+            ObjectInputStream ois = new ObjectInputStream(is);
+            usuarios = (ArrayList<Usuario>) ois.readObject();
+            ois.close();
+            is.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo de usuarios no encontrado.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Excepción: Archivo de usuarios no leído.");
+            e.printStackTrace();
+        }
+        return usuarios;
     }
 
     public static void sesionCliente(String email, int password) {

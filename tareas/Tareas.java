@@ -1,6 +1,8 @@
 package tareas;
 
-public abstract class Tareas {
+import java.io.Serializable;
+
+public abstract class Tareas implements Serializable{
     protected String titulo;
     protected String info;
     protected String categoria;

@@ -19,4 +19,20 @@ public abstract class Usuario {
     public void cerrarSesion() {
         this.sesion = false;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public boolean SesionActiva() {
+        return sesion;
+    }
 }

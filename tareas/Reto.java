@@ -1,6 +1,8 @@
 package tareas;
 
-public class Reto extends Tareas {
+import java.io.Serializable;
+
+public class Reto extends Tareas implements Serializable {
     private boolean completado;
 
     public Reto(String titulo, String info, String categoria, String duracion) {
@@ -12,7 +14,7 @@ public class Reto extends Tareas {
         this.completado = true;
     }
 
-    public boolean isCompletado() {
+    public boolean Completado() {
         return completado;
     }
 

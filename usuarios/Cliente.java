@@ -1,12 +1,12 @@
 package usuarios;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.ArrayList;
 import tareas.*;
 
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Serializable {
     private String fechaNacimiento;
     private int puntos;
     private ArrayList<Habito> habitos;
@@ -38,11 +38,11 @@ public class Cliente extends Usuario {
         }
     }
 
-    public void addHabito(Habito newHabito) {
+    public void agregarHabito(Habito newHabito) {
         habitos.add(newHabito);
     }
 
-    public void deleteHabito(int id) {
+    public void borrarHabito(int id) {
         habitos.remove(id);
     }
 
@@ -60,6 +60,10 @@ public class Cliente extends Usuario {
 
     public ArrayList<String> getItems() {
         return items;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public ArrayList<Habito> getHabitos() {
