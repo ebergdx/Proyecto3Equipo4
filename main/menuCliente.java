@@ -5,6 +5,7 @@ import usuarios.Cliente;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import recompensas.Recompensa;
 import tareas.Habito;
 
 public class menuCliente {
@@ -123,10 +124,60 @@ public class menuCliente {
     }
 
     public static void verRecompensas(Cliente cliente) {
-        //Se mostrarán las recompensas disponibles
+        ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
+        
+        if (recompensas.isEmpty()) {
+            System.out.println("No hay recompensas disponibles en la tienda.");
+            return;
+        }
+        
+        System.out.println("Tienes: " + cliente.getPuntos() + " puntos.");
+        for (Recompensa r : recompensas) {
+            System.out.printf("* [%s] %s - Costo: %d puntos\n",
+                r.getTipo(), r.getNombre(), r.getCosto());
+        }
     }
 
     public static void canejarPuntos(Cliente cliente) {
-        //Se enlazará la lógica de las recompensas y la información de los archivos
+        sc.nextLine();
+        System.out.println("--- Canjear Recompensas ---");
+        
+        ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
+        
+        if (recompensas.isEmpty()) {
+            System.out.println("No hay recompensas para canjear");
+            return;
+        }
+        
+        System.out.println("Tienes actualmente: " + cliente.getPuntos() + " puntos");
+        
+        for (int i = 0; i < recompensas.size(); i++) {
+            Recompensa r = recompensas.get(i);
+            System.out.printf("%d) [%s] %s - Costo: %d puntos\n",
+                i, r.getTipo(), r.getNombre(), r.getCosto());
+        }
+        
+        System.out.println("Elige el número de la recompensa a canjear (o -1 para salir):");
+        int opc = sc.nextInt();
+        
+        if (opc < 0 || opc >= recompensas.size()) {
+            System.out.println("Selección inválida o cancelada");
+            return;
+        }
+        
+        Recompensa recompensaElegida = recompensas.get(opc);
+        
+        if (cliente.getPuntos() >= recompensaElegida.getCosto()) {
+            
+            recompensaElegida.canjear(cliente);
+            
+            System.out.println("Has canjeado: " + recompensaElegida.getNombre());
+            System.out.println("Puntos restantes: " + cliente.getPuntos());
+            
+        } else {
+            System.out.println("Puntos insuficientes. Te faltan " + 
+                (recompensaElegida.getCosto() - cliente.getPuntos()) + " puntos.");
+        }
     }
 }
+

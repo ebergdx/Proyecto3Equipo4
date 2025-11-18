@@ -1,8 +1,9 @@
 package recompensas;
 
 import usuarios.Cliente;
+import java.io.Serializable;
 
-public abstract class Recompensa {
+public abstract class Recompensa implements Serializable {
 
     protected String nombre;
     protected int costo;

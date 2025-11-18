@@ -62,6 +62,10 @@ public class Cliente extends Usuario {
         return items;
     }
 
+    public ArrayList<Habito> getHabitos() {
+        return habitos;
+    }
+
     public String fechaFormato(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {

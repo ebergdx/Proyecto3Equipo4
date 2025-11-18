@@ -1,8 +1,9 @@
 package main;
 
 import java.util.Scanner;
-
-import usuarios.Cliente;
+import java.util.ArrayList;
+import usuarios.Admin;
+import recompensas.*;
 
 public class menuAdmin {
     private static Scanner sc = new Scanner(System.in);
@@ -50,5 +51,46 @@ public class menuAdmin {
 
         /*Todavía no se ha definido exactamente cómos e implementarán dichos métodos, ya que primero es necesario
          manejar los archivos para tener un mayor panorama */
+    }
+
+    private static void crearRecompensa() {
+        sc.nextLine(); 
+        System.out.println("--- Crear Nueva Recompensa ---");
+        
+        System.out.println("Ingrese el nombre de la recompensa (Ej: 'Medalla de Bronce'):");
+        String nombre = sc.nextLine();
+        
+        System.out.println("Ingrese el costo en puntos (Ej: 100):");
+        int costo = sc.nextInt();
+        sc.nextLine();
+        
+        System.out.println("Ingrese el tipo (logro, item, bono):");
+        String tipo = sc.nextLine();
+        
+        ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
+        
+        Recompensa nueva = CrearRecompensa.crearRecompensa(tipo, nombre, costo);
+        
+        recompensas.add(nueva);
+        
+        ControlArchivos.guardarRecompensas(recompensas);
+        
+        System.out.println("Recompensa creada");
+    }
+
+    private static void verRecompensas() {
+        System.out.println("-- Recompensas Disponibles --");
+        ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
+        
+        if (recompensas.isEmpty()) {
+            System.out.println("No hay recompensas creadas");
+            return;
+        }
+        
+        for (int i = 0; i < recompensas.size(); i++) {
+            Recompensa r = recompensas.get(i);
+            System.out.printf("%d) [%s] %s - Costo: %d puntos\n",
+                i, r.getTipo(), r.getNombre(), r.getCosto());
+        }
     }
 }
