@@ -12,6 +12,13 @@ public class Habito extends Tareas implements Serializable {
         this.racha = racha;
     }
 
+    public Habito(String titulo, String info, String frecuencia, String categoria) {
+        super(titulo, info, categoria, null);
+        this.frecuencia = frecuencia;
+        this.racha = 0;
+
+    }
+
     public String getFrecuencia() {
         return frecuencia;
     }

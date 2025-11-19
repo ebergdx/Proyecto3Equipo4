@@ -3,22 +3,21 @@ package usuarios;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import tareas.*;
 
 public class Cliente extends Usuario {
     private String fechaNacimiento;
     private int puntos;
-    private LinkedList<Habito> habitos;
-    private LinkedList<String> logros;
-    private LinkedList<String> items;
+    private ArrayList<Habito> habitos;
+    private ArrayList<String> logros;
+    private ArrayList<String> items;
 
     public Cliente(String nombre, String email, int password, String fechaNacimiento) {
         super(nombre, email, password);
         this.fechaNacimiento = fechaFormato(fechaNacimiento);
-        this.habitos = new LinkedList<>();
-        this.logros = new LinkedList<>();
-        this.items = new LinkedList<>();
+        this.habitos = new ArrayList<>();
+        this.logros = new ArrayList<>();
+        this.items = new ArrayList<>();
         this.puntos = 0;
     }
 
@@ -40,7 +39,7 @@ public class Cliente extends Usuario {
         }
     }
 
-    public LinkedList<Habito> getHabitos() {
+    public ArrayList<Habito> getHabitos() {
         return habitos;
     }
 
@@ -60,11 +59,11 @@ public class Cliente extends Usuario {
         items.add(item);
     }
 
-    public LinkedList<String> getLogros() {
+    public ArrayList<String> getLogros() {
         return logros;
     }
 
-    public LinkedList<String> getItems() {
+    public ArrayList<String> getItems() {
         return items;
     }
 
