@@ -1,9 +1,0 @@
-package excepciones;
-
-import java.io.IOException;
-
-public class ArchivoNoEncontrado extends IOException {
-    public ArchivoNoEncontrado() {
-        super("Excepción: No se encontró el archivo.");
-    }
-}
