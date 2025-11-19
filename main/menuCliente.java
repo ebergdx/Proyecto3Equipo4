@@ -11,7 +11,7 @@ import tareas.Habito;
 public class menuCliente {
     private static Scanner sc = new Scanner(System.in);
     
-    public static void mostrarCliente(Cliente cliente) {
+    public static void AppCliente(Cliente cliente) {
         System.out.println("\n\t-- Bienvenido a la aplicación --");
         int opc;
         sc.nextLine();
@@ -180,4 +180,3 @@ public class menuCliente {
         }
     }
 }
-
