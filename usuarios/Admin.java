@@ -2,15 +2,35 @@ package usuarios;
 
 import java.io.Serializable;
 
-public class Admin extends Usuario implements Serializable {
-    private short clave;
-    
-    public Admin(String nombre, String email, int id, short clave) {
-        super(nombre, email, id);
-        this.clave = clave;
+public abstract class Usuario implements Serializable {
+    protected String nombre;
+    protected String email;
+    protected int password;
+    protected boolean sesion = false;
+
+    protected Usuario(String nombre, String email, int password) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
     }
-    
-    public short getClave() {
-        return clave;
+
+    public void iniciarSesion() {
+        this.sesion = true;
+    }
+
+    public void cerrarSesion() {
+        this.sesion = false;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public int getPassword() {
+        return password;
     }
 }
