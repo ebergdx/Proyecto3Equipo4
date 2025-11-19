@@ -1,15 +1,17 @@
 package usuarios;
 
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable {
     protected String nombre;
     protected String email;
-    protected int id;
+    protected int password;
     protected boolean sesion = false;
 
-    protected Usuario(String nombre, String email, int id) {
+    protected Usuario(String nombre, String email, int password) {
         this.nombre = nombre;
         this.email = email;
-        this.id = id;
+        this.password = password;
     }
 
     public void iniciarSesion() {
@@ -23,16 +25,12 @@ public abstract class Usuario {
     public String getNombre() {
         return nombre;
     }
-    
+
     public String getEmail() {
-        return email;
+        return this.email;
     }
-    
-    public int getId() {
-        return id;
-    }
-    
-    public boolean SesionActiva() {
-        return sesion;
+
+    public int getPassword() {
+        return password;
     }
 }
