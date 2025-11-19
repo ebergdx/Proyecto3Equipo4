@@ -1,14 +1,16 @@
 package main;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import recompensas.Recompensa;
 import usuarios.Admin;
-import recompensas.*;
+import usuarios.Cliente;
 
 public class menuAdmin {
     private static Scanner sc = new Scanner(System.in);
     
-    public static void mostrarCliente(Admin admin) {
+    public static void Administrar(Admin admin) {
         System.out.println("\n\t-- Bienvenido al menú de administración --");
         int opc;
         sc.nextLine();
@@ -49,11 +51,9 @@ public class menuAdmin {
 
         } while(opc != 0);
 
-        /*Todavía no se ha definido exactamente cómos e implementarán dichos métodos, ya que primero es necesario
-         manejar los archivos para tener un mayor panorama */
     }
 
-    private static void crearRecompensa() {
+        private static void crearRecompensa() {
         sc.nextLine(); 
         System.out.println("--- Crear Nueva Recompensa ---");
         
