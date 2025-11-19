@@ -1,9 +1,13 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import recompensas.CrearRecompensa;
 import recompensas.Recompensa;
+import tareas.Habito;
 import usuarios.Admin;
 import usuarios.Cliente;
 
@@ -68,11 +72,8 @@ public class menuAdmin {
         String tipo = sc.nextLine();
         
         ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
-        
         Recompensa nueva = CrearRecompensa.crearRecompensa(tipo, nombre, costo);
-        
         recompensas.add(nueva);
-        
         ControlArchivos.guardarRecompensas(recompensas);
         
         System.out.println("Recompensa creada");
@@ -93,4 +94,101 @@ public class menuAdmin {
                 i, r.getTipo(), r.getNombre(), r.getCosto());
         }
     }
+
+    private static void editarRecompensas() {
+        System.out.println("\n--- Editar Recompensas ---");
+        ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
+        
+        if(recompensas.isEmpty()) {
+            System.out.println("No hay recompensas para editar");
+            return;
+        }
+        
+        for (int i = 0; i < recompensas.size(); i++) {
+            Recompensa r = recompensas.get(i);
+            System.out.printf("%d) [%s] %s - %d pts\n",
+                i, r.getTipo(), r.getNombre(), r.getCosto());
+        }
+        
+        System.out.print("\nEliminar recompensa (-1 para cancelar): ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+        
+        if(opc >= 0 && opc < recompensas.size()) {
+            recompensas.remove(opc);
+            ControlArchivos.guardarRecompensas(recompensas);
+            System.out.println("Recompensa eliminada");
+        }
+    }
+    
+    private static void registroUsuarios() {
+        System.out.println("\n--- Registro de Usuarios ---");
+        ArrayList<Cliente> clientes = Sistema.clientes;
+        ArrayList<Admin> admins = Sistema.admins;
+        
+        System.out.println("Total usuarios: " + (clientes.size() + admins.size()));
+        System.out.println("Clientes: " + clientes.size());
+        System.out.println("Admins: " + admins.size());
+        
+        System.out.println("\nClientes:");
+        for(Cliente c : clientes) {
+            System.out.printf("- %s (%s) - %d hábitos, %d pts\n",
+                c.getNombre(), c.getEmail(), c.getHabitos().size(), c.getPuntos());
+        }
+    }
+    
+    private static void categoriasHabitos() {
+        System.out.println("\n--- Análisis de Categorías ---");
+        ArrayList<Cliente> clientes = Sistema.clientes;
+        
+        Map<String, Integer> categorias = new HashMap<>();
+        
+        for(Cliente c : clientes) {
+            for(Habito h : c.getHabitos()) {
+                String cat = h.getCategoria();
+                categorias.put(cat, categorias.getOrDefault(cat, 0) + 1);
+            }
+        }
+        
+        if(categorias.isEmpty()) {
+            System.out.println("No hay hábitos registrados");
+            return;
+        }
+        
+        System.out.println("Categorías más usadas:");
+        for(Map.Entry<String, Integer> entry : categorias.entrySet()) {
+            System.out.println("- " + entry.getKey() + ": " + entry.getValue() + " hábitos");
+        }
+    }
+    
+    private static void estadisticasUsuarios() {
+        System.out.println("\n-- Estadísticas --");
+        ArrayList<Cliente> clientes = Sistema.clientes;
+        
+        int totalHabitos = 0;
+        int totalPuntos = 0;
+        int totalRachas = 0;
+        
+        for(Cliente c : clientes) {
+            totalHabitos += c.getHabitos().size();
+            totalPuntos += c.getPuntos();
+            
+            for(Habito h : c.getHabitos()) {
+                totalRachas += h.getRacha();
+            }
+        }
+        
+        System.out.println("Total de hábitos: " + totalHabitos);
+        System.out.println("Total de puntos: " + totalPuntos);
+        System.out.println("Total de rachas: " + totalRachas + " días");
+        
+        if(clientes.size() > 0) {
+            System.out.println("Promedio hábitos/usuario: " + (totalHabitos / clientes.size()));
+        }
+    }
+    
+    private static void crearTarea() {
+        System.out.println("\n--- Crear Tarea ---");
+    }
 }
+
