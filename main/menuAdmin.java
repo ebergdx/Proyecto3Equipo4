@@ -16,15 +16,15 @@ public class menuAdmin {
     private static Scanner sc = new Scanner(System.in);
     
     public static void Administrar(Admin admin) {
-        System.out.println("\n\t-- Bienvenido al menú de administración --");
+        System.out.println("\n-- Bienvenido al menú de administración --");
         int opc;
-        sc.nextLine();
 
         do {
         try {
             System.out.println("\n1)Crear Recompensas\n2)Ver Recompensas\n3)Analizar registro de usuarios\n4)Analizar categorias de hábitos");
             System.out.println("5)Ver estadísticas\n6)Crear evento o tarea\n7)Editar recompensas\n0)Cerrar sesión");
             opc = sc.nextInt();
+            sc.nextLine();
             
             switch(opc) {
                 case 1:

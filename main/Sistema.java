@@ -27,9 +27,6 @@ public class Sistema {
     }
     
     public static void finalizar() {
-        ArrayList<Usuario> clientesUsuarios = new ArrayList<>(clientes);
-        ArrayList<Usuario> adminsUsuarios = new ArrayList<>(admins);
-        
         ControlArchivos.guardarClientes(clientes);
         ControlArchivos.guardarAdmins(admins);
     }

@@ -15,13 +15,13 @@ public class menuCliente {
     public static void AppCliente(Cliente cliente) {
         System.out.println("\n\t-- Bienvenido a la aplicación --");
         int opc;
-        sc.nextLine();
 
         do {
         try {
             System.out.println("\n1)Añadir hábito\n2)Ver hábitos\n3)Completar hábito\n4)Eliminar hábito");
             System.out.println("5)Ver estadísticas\n6)Ver puntos\n7)Ver recompensas\n8)Canjear puntos\n0)Cerrar sesión");
             opc = sc.nextInt();
+            sc.nextLine();
             
             switch(opc) {
                 case 1:
@@ -64,8 +64,7 @@ public class menuCliente {
 }
 
     public static void crearHabito(Cliente cliente) {
-        //se planea cambiarlo o agregar otra funcion con los hábitos creados
-        //por los administradores
+        sc.nextLine();
         System.out.println("Ingrese el nombre: ");
         String nombre = sc.nextLine();
         System.out.println("Añada una descripción del hábito.");
@@ -132,12 +131,10 @@ public class menuCliente {
     }
 
     public static void estadisticas(Cliente cliente) {
-        //Se añadirá la lógica respecto al uso de 
-        //archivos/registros de clientes y sus hábitos
     }
 
     public static void verPuntos(Cliente cliente) {
-        System.out.print("Esta es su cantidad de puntos: " + cliente.getPuntos());
+        System.out.println("Esta es su cantidad de puntos: " + cliente.getPuntos());
     }
 
     public static void verRecompensas(Cliente cliente) {
