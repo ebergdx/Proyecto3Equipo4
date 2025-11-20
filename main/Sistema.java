@@ -30,8 +30,8 @@ public class Sistema {
         ArrayList<Usuario> clientesUsuarios = new ArrayList<>(clientes);
         ArrayList<Usuario> adminsUsuarios = new ArrayList<>(admins);
         
-        ControlArchivos.guardarClientes(clientesUsuarios);
-        ControlArchivos.guardarAdmins(adminsUsuarios);
+        ControlArchivos.guardarClientes(clientes);
+        ControlArchivos.guardarAdmins(admins);
     }
     
     public static void iniciarSesion() {
@@ -121,7 +121,6 @@ public class Sistema {
                 password = sc.nextInt();
                 sc.nextLine();
                 
-                emails.add(email);
                 break;
                 
             } catch(InputMismatchException e) {
@@ -154,6 +153,8 @@ public class Sistema {
         } else {
             crearCuentaCliente(nombre, email, password);
         }
+
+        emails.add(email);
     }
     
     private static void crearCuentaAdmin(String nombre, String email, int password) {

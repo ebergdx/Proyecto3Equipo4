@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class menuAdmin {
         sc.nextLine();
 
         do {
+        try {
             System.out.println("\n1)Crear Recompensas\n2)Ver Recompensas\n3)Analizar registro de usuarios\n4)Analizar categorias de hábitos");
             System.out.println("5)Ver estadísticas\n6)Crear evento o tarea\n7)Editar recompensas\n0)Cerrar sesión");
             opc = sc.nextInt();
@@ -50,12 +52,16 @@ public class menuAdmin {
                     System.out.println("Saliendo del sistema");
                     break;
                 default:
+                    System.out.println("Opción inválida");
                     break;
             }
-
-        } while(opc != 0);
-
-    }
+        } catch(InputMismatchException e) {
+            System.out.println("Excepción: Ingrese un número entero.");
+            sc.nextLine();
+            opc = -1;
+        }
+    } while(opc != 0);
+}
 
         private static void crearRecompensa() {
         sc.nextLine(); 

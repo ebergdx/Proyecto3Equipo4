@@ -3,6 +3,8 @@ package usuarios;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import excepciones.PuntosInsuficientes;
 import tareas.*;
 
 public class Cliente extends Usuario {
@@ -32,12 +34,12 @@ public class Cliente extends Usuario {
     }
 
     public void restarPuntos(int pts) {
-        if(pts > 0 && pts <= puntos) {
-            this.puntos -= pts;
-        } else {
-            System.out.println("No hay suficientes puntos para usarse.");
-        }
+    if(pts > 0 && pts <= puntos) {
+        this.puntos -= pts;
+    } else {
+        throw new PuntosInsuficientes();
     }
+}
 
     public ArrayList<Habito> getHabitos() {
         return habitos;

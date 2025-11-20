@@ -14,7 +14,7 @@ public class ControlArchivos {
     public static final String RECOMPENSAS = "recompensas.bin";
     public static final String HABITOS = "habitos.bin";
 
-    public static void guardarClientes(ArrayList<Usuario> clientes) {
+    public static void guardarClientes(ArrayList<Cliente> clientes) {
         try {
             OutputStream os = new FileOutputStream(CLIENTES_REGISTRO);
             ObjectOutputStream oos = new ObjectOutputStream(os);
@@ -22,7 +22,6 @@ public class ControlArchivos {
             oos.close();
         } catch(IOException e) {
             System.out.println("Excepción: Usuarios no almacenados correctamente.");
-            e.printStackTrace();
         }
     }
 
@@ -50,28 +49,7 @@ public class ControlArchivos {
         return clientes;
     }
 
-    public static void verClientes(ArrayList<Usuario> usuarios) {
-        try {
-            InputStream is = new FileInputStream(CLIENTES_REGISTRO);
-            ObjectInputStream ois = new ObjectInputStream(is);
-            
-            Usuario usuario = (Usuario)ois.readObject();
-
-            for(int i = 0; i < usuarios.size(); i++) {
-                System.out.println(usuario);
-            }
-            
-            ois.close();
-        } catch(IOException e) {
-            System.out.println("Excepción: Archivo no leído.");
-            e.printStackTrace();
-        } catch(ClassNotFoundException e) {
-            System.out.println("Excepción: Clase no encontrada.");
-            e.printStackTrace();
-        }
-    }
-
-    public static void guardarAdmins(ArrayList<Usuario> admins) {
+    public static void guardarAdmins(ArrayList<Admin> admins) {
         try {
             OutputStream os = new FileOutputStream(ADMINS_REGISTRO);
             ObjectOutputStream oos = new ObjectOutputStream(os);
@@ -162,7 +140,7 @@ public class ControlArchivos {
         }
 
         for(Admin admin : admins) {
-            System.out.println(admins);
+            System.out.println(admin);
         }
     }
 }

@@ -3,6 +3,7 @@ package main;
 import usuarios.Cliente;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import recompensas.Recompensa;
@@ -17,8 +18,9 @@ public class menuCliente {
         sc.nextLine();
 
         do {
+        try {
             System.out.println("\n1)Añadir hábito\n2)Ver hábitos\n3)Completar hábito\n4)Eliminar hábito");
-            System.out.println("5)Ver estadísticas\6)Ver puntos\n7)Ver recompensas\n8)Canjear puntos\n0)Cerrar sesión");
+            System.out.println("5)Ver estadísticas\n6)Ver puntos\n7)Ver recompensas\n8)Canjear puntos\n0)Cerrar sesión");
             opc = sc.nextInt();
             
             switch(opc) {
@@ -44,17 +46,22 @@ public class menuCliente {
                     verRecompensas(cliente);
                     break;
                 case 8:
-                    canejarPuntos(cliente);
+                    canjearPuntos(cliente);
                     break;
                 case 0:
                     System.out.println("Saliendo del sistema");
                     break;
                 default:
+                    System.out.println("Opción inválida");
                     break;
             }
-
-        } while(opc != 0);
-    }
+        } catch(InputMismatchException e) {
+            System.out.println("Excepción: Ingrese un número entero.");
+            sc.nextLine();
+            opc = -1;
+        }
+    } while(opc != 0);
+}
 
     public static void crearHabito(Cliente cliente) {
         //se planea cambiarlo o agregar otra funcion con los hábitos creados
@@ -95,8 +102,13 @@ public class menuCliente {
         verHabitos(cliente);
         System.out.println("Seleccione un hábito: ");
         int opc = sc.nextInt();
-        listaHabitos.get(opc).diaRacha();
-        System.out.println("Hábito completado este día.");
+
+        if(opc >= 0 && opc < listaHabitos.size()) {
+            listaHabitos.get(opc).diaRacha();
+            System.out.println("Hábito completado este día.");
+        } else {
+            System.out.println("Opción inválida.");
+        }
     }
 
     public static void eliminarHabito(Cliente cliente) {
@@ -110,8 +122,13 @@ public class menuCliente {
         verHabitos(cliente);
         System.out.println("Seleccione un hábito: ");
         int opc = sc.nextInt();
-        listaHabitos.remove(opc);
-        System.out.println("Hábito eliminado.");
+
+        if(opc >= 0 && opc < listaHabitos.size()) {
+                listaHabitos.remove(opc);
+                System.out.println("Hábito eliminado.");
+        } else {
+            System.out.println("Opción inválida.");
+        }
     }
 
     public static void estadisticas(Cliente cliente) {
@@ -138,7 +155,7 @@ public class menuCliente {
         }
     }
 
-    public static void canejarPuntos(Cliente cliente) {
+    public static void canjearPuntos(Cliente cliente) {
         sc.nextLine();
         System.out.println("--- Canjear Recompensas ---");
         

@@ -29,7 +29,7 @@ public class App {
                 sc.nextLine();
                 opc = 9;
             }
-        } while(opc != 0);
+        } while(opc != 3);
 
         Sistema.finalizar();
         sc.close();
