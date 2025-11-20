@@ -136,6 +136,19 @@ public class menuCliente {
     }
 
     public static void estadisticas(Cliente cliente) {
+        System.out.println("\n-- Estadísticas --");
+        
+        ArrayList<Habito> habitos = cliente.getHabitos();
+        
+        System.out.println("Puntos acumulados: " + cliente.getPuntos());
+        System.out.println("Total de hábitos activos: " + habitos.size());
+        System.out.println("Logros desbloqueados: " + cliente.getLogros().size());
+        System.out.println("Items en inventario: " + cliente.getItems().size());
+        
+        if (habitos.isEmpty()) {
+            System.out.println("\n(Agrega hábitos para ver detalles en tu cuenta)");
+            return;
+        }
     }
 
     public static void verPuntos(Cliente cliente) {
