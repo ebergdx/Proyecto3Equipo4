@@ -14,7 +14,8 @@ public class App {
 
         do {
             try {
-                System.out.println("1)Iniciar sesión\n2)Crear cuenta\n3)Salir");
+                System.out.println("\n1)Iniciar sesión\n2)Crear cuenta\n3)Salir");
+                System.out.print("-Ingrese su opción: ");
                 opc = sc.nextInt();
                 sc.nextLine();
 
