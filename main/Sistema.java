@@ -199,7 +199,7 @@ public class Sistema {
     
     private static Cliente buscarCliente(String email, String password) {
         for(Cliente c : clientes) {
-            if(c.getEmail().equals(email) && c.getPassword() == password) {
+            if(c.getEmail().equals(email) && c.getPassword().equals(password)) {
                 return c;
             }
         }
@@ -208,7 +208,7 @@ public class Sistema {
     
     private static Admin buscarAdmin(String email, String password, int clave) {
         for(Admin a : admins) {
-            if(a.getEmail().equals(email) && a.getPassword() == password && a.getClave() == clave) {
+            if(a.getEmail().equals(email) && a.getPassword().equals(password) && a.getClave() == clave) {
                 return a;
             }
         }
