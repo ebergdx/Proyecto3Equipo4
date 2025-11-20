@@ -101,10 +101,15 @@ public class menuCliente {
         verHabitos(cliente);
         System.out.println("Seleccione un hábito: ");
         int opc = sc.nextInt();
+        sc.nextLine();
 
         if(opc >= 0 && opc < listaHabitos.size()) {
             listaHabitos.get(opc).diaRacha();
             System.out.println("Hábito completado este día.");
+
+            int puntosGanados = 20;
+            cliente.agregarPuntos(puntosGanados);
+            System.out.println("Has ganado " + puntosGanados + " puntos");
         } else {
             System.out.println("Opción inválida.");
         }
