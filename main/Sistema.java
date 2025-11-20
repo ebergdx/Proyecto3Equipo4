@@ -40,7 +40,6 @@ public class Sistema {
                 String correo = sc.nextLine();
                 System.out.print("Contraseña: ");
                 String password = sc.nextLine();
-                sc.nextLine();
                 
                 System.out.print("¿Es administrador? (1=Sí, 0=No): ");
                 int opc = sc.nextInt();
@@ -114,7 +113,7 @@ public class Sistema {
                 email = sc.nextLine();
                 validarCorreoExistente(email);
                 
-                System.out.print("Contraseña (números entero): ");
+                System.out.print("Contraseña: ");
                 password = sc.nextLine();
                 
                 break;
@@ -159,7 +158,7 @@ public class Sistema {
         do {
             try {
                 System.out.print("Ingrese su clave de administrador (número): ");
-                short clave = sc.nextShort();
+                int clave = sc.nextInt();
                 sc.nextLine();
                 
                 Admin nuevoAdmin = new Admin(nombre, email, password, clave);
