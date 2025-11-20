@@ -4,8 +4,7 @@ import usuarios.*;
 import java.io.*;
 import tareas.*;
 import java.util.ArrayList;
-
-import excepciones.UsuarioNoEncontrado;
+import excepciones.*;
 import recompensas.Recompensa;
 
 public class ControlArchivos {

@@ -1,8 +1,6 @@
 package tareas;
 
-import java.io.Serializable;
-
-public class Reto extends Tareas implements Serializable {
+public class Reto extends Tareas {
     private boolean completado;
 
     public Reto(String titulo, String info, String categoria, String duracion) {

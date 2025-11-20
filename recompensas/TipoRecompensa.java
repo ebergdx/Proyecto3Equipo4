@@ -11,7 +11,7 @@ public class TipoRecompensa extends Recompensa {
     @Override
     public void aplicar(Cliente cliente) {
 
-        switch (tipo) {
+        switch(tipo) {
 
             case "logro":
                 System.out.println("Logro desbloqueado: ");

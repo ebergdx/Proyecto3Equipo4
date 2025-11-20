@@ -60,18 +60,18 @@ public class menuCliente {
             sc.nextLine();
             opc = -1;
         }
-    } while(opc != 0);
-}
+        } while(opc != 0);
+    }
 
     public static void crearHabito(Cliente cliente) {
         sc.nextLine();
-        System.out.println("Ingrese el nombre: ");
+        System.out.print("Ingrese el nombre: ");
         String nombre = sc.nextLine();
-        System.out.println("Añada una descripción del hábito.");
+        System.out.print("Añada una descripción del hábito.");
         String info = sc.nextLine();
-        System.out.println("Añada la frecuencia del hábito.");
+        System.out.print("Añada la frecuencia del hábito.");
         String frecuencia = sc.nextLine();
-        System.out.println("Ingrese la categoría del hábito.");
+        System.out.print("Ingrese la categoría del hábito.");
         String categoria = sc.nextLine();
 
         Habito nuevoHabito = new Habito(nombre, info, frecuencia, categoria);
@@ -98,7 +98,9 @@ public class menuCliente {
             System.out.println("No tienes hábitos añadidos.");
             return;
         }
+
         verHabitos(cliente);
+        
         System.out.println("Seleccione un hábito: ");
         int opc = sc.nextInt();
         sc.nextLine();

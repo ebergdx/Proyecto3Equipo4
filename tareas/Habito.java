@@ -1,8 +1,6 @@
 package tareas;
 
-import java.io.Serializable;
-
-public class Habito extends Tareas implements Serializable {
+public class Habito extends Tareas {
     private String frecuencia;
     private short racha;
 
