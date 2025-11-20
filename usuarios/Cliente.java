@@ -14,7 +14,7 @@ public class Cliente extends Usuario {
     private ArrayList<String> logros;
     private ArrayList<String> items;
 
-    public Cliente(String nombre, String email, int password, String fechaNacimiento) {
+    public Cliente(String nombre, String email, String password, String fechaNacimiento) {
         super(nombre, email, password);
         this.fechaNacimiento = fechaFormato(fechaNacimiento);
         this.habitos = new ArrayList<>();

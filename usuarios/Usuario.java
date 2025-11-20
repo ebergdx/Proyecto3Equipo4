@@ -5,10 +5,10 @@ import java.io.Serializable;
 public abstract class Usuario implements Serializable {
     protected String nombre;
     protected String email;
-    protected int password;
+    protected String password;
     protected boolean sesion = false;
 
-    protected Usuario(String nombre, String email, int password) {
+    protected Usuario(String nombre, String email, String password) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -30,7 +30,7 @@ public abstract class Usuario implements Serializable {
         return this.email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 }

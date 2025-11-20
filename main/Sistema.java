@@ -39,7 +39,7 @@ public class Sistema {
                 System.out.print("Email: ");
                 String correo = sc.nextLine();
                 System.out.print("Contraseña: ");
-                int password = sc.nextInt();
+                String password = sc.nextLine();
                 sc.nextLine();
                 
                 System.out.print("¿Es administrador? (1=Sí, 0=No): ");
@@ -48,7 +48,7 @@ public class Sistema {
                 
                 if(opc == 1) {
                     System.out.print("Ingrese su clave de administrador: ");
-                    short clave = sc.nextShort();
+                    int clave = sc.nextInt();
                     sc.nextLine();
                     
                     Admin admin = buscarAdmin(correo, password, clave);
@@ -101,7 +101,7 @@ public class Sistema {
         int intentos = 3;
         String nombre = "";
         String email = "";
-        int password = 0;
+        String password = "";
         
         System.out.println("\nCrear Nueva Cuenta");
         
@@ -115,8 +115,7 @@ public class Sistema {
                 validarCorreoExistente(email);
                 
                 System.out.print("Contraseña (números entero): ");
-                password = sc.nextInt();
-                sc.nextLine();
+                password = sc.nextLine();
                 
                 break;
                 
@@ -154,7 +153,7 @@ public class Sistema {
         emails.add(email);
     }
     
-    private static void crearCuentaAdmin(String nombre, String email, int password) {
+    private static void crearCuentaAdmin(String nombre, String email, String password) {
         int intentos = 3;
         
         do {
@@ -183,7 +182,7 @@ public class Sistema {
         System.out.println("No se pudo crear la cuenta");
     }
     
-    private static void crearCuentaCliente(String nombre, String email, int password) {
+    private static void crearCuentaCliente(String nombre, String email, String password) {
         System.out.print("Fecha de nacimiento: ");
         String fechaNacimiento = sc.nextLine();
         
@@ -199,7 +198,7 @@ public class Sistema {
         finalizar();
     }
     
-    private static Cliente buscarCliente(String email, int password) {
+    private static Cliente buscarCliente(String email, String password) {
         for(Cliente c : clientes) {
             if(c.getEmail().equals(email) && c.getPassword() == password) {
                 return c;
@@ -208,7 +207,7 @@ public class Sistema {
         return null;
     }
     
-    private static Admin buscarAdmin(String email, int password, short clave) {
+    private static Admin buscarAdmin(String email, String password, int clave) {
         for(Admin a : admins) {
             if(a.getEmail().equals(email) && a.getPassword() == password && a.getClave() == clave) {
                 return a;
