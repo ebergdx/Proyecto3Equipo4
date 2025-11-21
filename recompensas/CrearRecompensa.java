@@ -1,8 +1,6 @@
 package recompensas;
 
-public class CrearRecompensa {
+public abstract class CrearRecompensa {
+    public abstract Recompensa crear(String nombre, int costo);
 
-    public static Recompensa crearRecompensa(String tipo, String nombre, int costo) {
-        return new TipoRecompensa(nombre, costo, tipo);
-    }
 }

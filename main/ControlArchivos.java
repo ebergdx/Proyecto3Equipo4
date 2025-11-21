@@ -19,7 +19,7 @@ public class ControlArchivos {
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(clientes);
             oos.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Excepción: Usuarios no almacenados correctamente.");
         }
     }
@@ -41,7 +41,7 @@ public class ControlArchivos {
         } catch (ClassNotFoundException e) {
             System.out.println("Excepción: Archivo de clientes no leído.");
             e.printStackTrace();
-        } catch(ClassCastException e) {
+        } catch (ClassCastException e) {
             System.out.println("Excepción: Error de casteo.");
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class ControlArchivos {
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(admins);
             oos.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Excepción: Usuarios no almacenados correctamente.");
         }
     }
@@ -67,16 +67,16 @@ public class ControlArchivos {
             admins = (ArrayList<Admin>) ois.readObject();
             ois.close();
             is.close();
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Archivo de usuarios no encontrado.");
             e.printStackTrace();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Excepción: Archivo de usuarios no leído.");
             e.printStackTrace();
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("Excepción: Archivo de clientes no leído.");
             e.printStackTrace();
-        } catch(ClassCastException e) {
+        } catch (ClassCastException e) {
             System.out.println("Excepción: Error de casteo.");
             e.printStackTrace();
         }
@@ -89,30 +89,30 @@ public class ControlArchivos {
             ObjectOutputStream oos = new ObjectOutputStream(os);
             oos.writeObject(recompensas);
             oos.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Excepción: Usuarios no almacenados correctamente.");
         }
     }
 
     public static ArrayList<Recompensa> cargarRecompensas() {
         ArrayList<Recompensa> recompensas = new ArrayList<>();
-        
+
         try {
-            InputStream is = new FileInputStream(RECOMPENSAS); 
+            InputStream is = new FileInputStream(RECOMPENSAS);
             ObjectInputStream ois = new ObjectInputStream(is);
-            recompensas = (ArrayList<Recompensa>) ois.readObject(); 
+            recompensas = (ArrayList<Recompensa>) ois.readObject();
             ois.close();
             is.close();
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Archivo de usuarios no encontrado.");
             e.printStackTrace();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Excepción: Archivo de usuarios no leído.");
             e.printStackTrace();
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("Excepción: Archivo de clientes no leído.");
             e.printStackTrace();
-        } catch(ClassCastException e) {
+        } catch (ClassCastException e) {
             System.out.println("Excepción: Error de casteo.");
             e.printStackTrace();
         }
@@ -121,24 +121,24 @@ public class ControlArchivos {
 
     public static void verClientes() {
         ArrayList<Cliente> clientes = cargarClientes();
-        if(clientes.isEmpty()) {
+        if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados.");
             return;
         }
 
-        for(Cliente cliente : clientes) {
+        for (Cliente cliente : clientes) {
             System.out.println(cliente);
         }
     }
 
     public static void verAdmins() {
         ArrayList<Admin> admins = cargarAdmins();
-        if(admins.isEmpty()) {
+        if (admins.isEmpty()) {
             System.out.println("No hay clientes registrados.");
             return;
         }
 
-        for(Admin admin : admins) {
+        for (Admin admin : admins) {
             System.out.println(admin);
         }
     }

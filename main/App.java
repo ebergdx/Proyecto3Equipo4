@@ -19,18 +19,18 @@ public class App {
                 opc = sc.nextInt();
                 sc.nextLine();
 
-                switch(opc) {
+                switch (opc) {
                     case 1 -> Sistema.iniciarSesion();
                     case 2 -> Sistema.crearCuenta();
                     case 3 -> System.out.println("Gracias por su preferencia");
                     default -> System.out.println("Ingrese una opción válida");
                 }
-            } catch(InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Excepción: Ingrese un número entero.");
                 sc.nextLine();
                 opc = 9;
             }
-        } while(opc != 3);
+        } while (opc != 3);
 
         Sistema.finalizar();
         sc.close();

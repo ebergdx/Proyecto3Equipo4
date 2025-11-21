@@ -15,18 +15,17 @@ public abstract class Recompensa implements Serializable {
         this.tipo = tipo;
     }
 
-    public String getTipo() { 
-        return tipo; 
+    public String getTipo() {
+        return tipo;
     }
 
-    public String getNombre() { 
-        return nombre; 
+    public String getNombre() {
+        return nombre;
     }
 
-    public int getCosto() { 
-        return costo; 
+    public int getCosto() {
+        return costo;
     }
-
 
     public void canjear(Cliente cliente) {
         aplicar(cliente);

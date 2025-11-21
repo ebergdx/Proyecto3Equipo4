@@ -28,18 +28,18 @@ public class Cliente extends Usuario {
     }
 
     public void agregarPuntos(int pts) {
-        if(pts > 0) {
+        if (pts > 0) {
             this.puntos += pts;
         }
     }
 
     public void restarPuntos(int pts) {
-    if(pts > 0 && pts <= puntos) {
-        this.puntos -= pts;
-    } else {
-        throw new PuntosInsuficientes();
+        if (pts > 0 && pts <= puntos) {
+            this.puntos -= pts;
+        } else {
+            throw new PuntosInsuficientes();
+        }
     }
-}
 
     public ArrayList<Habito> getHabitos() {
         return habitos;
@@ -79,8 +79,8 @@ public class Cliente extends Usuario {
         System.out.println("Puntos: " + this.puntos);
 
         int habitosActivos = 0;
-        for(Habito habito : habitos) {
-            if(habito.getRacha() > 0) {
+        for (Habito habito : habitos) {
+            if (habito.getRacha() > 0) {
                 habitosActivos++;
             }
         }

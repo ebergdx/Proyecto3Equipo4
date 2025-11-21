@@ -61,9 +61,9 @@ public class Habito extends Tareas {
     @Override
     public String toString() {
         return "\tInformación del hábito " + titulo +
-        " | Descripción: " + info +
-        " | Frecuencia: " + frecuencia +
-        " | Categoría: " + categoria +
-        " | Racha de días: " + racha;
+                " | Descripción: " + info +
+                " | Frecuencia: " + frecuencia +
+                " | Categoría: " + categoria +
+                " | Racha de días: " + racha;
     }
 }
