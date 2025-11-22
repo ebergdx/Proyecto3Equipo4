@@ -47,8 +47,7 @@ public class Sistema {
 
                 if (opc == 1) {
                     System.out.print("Ingrese su clave de administrador: ");
-                    int clave = sc.nextInt();
-                    sc.nextLine();
+                    String clave = sc.nextLine();
 
                     Admin admin = buscarAdmin(correo, password, clave);
                     if (admin != null) {
@@ -134,67 +133,44 @@ public class Sistema {
             }
         } while (intentos > 0);
 
-        if (intentos == 0) {
-            System.out.println("No se pudo crear la cuenta");
-            return;
-        }
+        try {
+            System.out.print("\n¿Es administrador? (1=Sí, 0=No): ");
+            int opc = sc.nextInt();
+            sc.nextLine();
 
-        System.out.print("\n¿Es administrador? (1=Sí, 0=No): ");
-        int opc = sc.nextInt();
-        sc.nextLine();
+            UsuarioFabAbs fabrica;
+            String datoExtra;
 
-        if (opc == 1) {
-            crearCuentaAdmin(nombre, email, password);
-        } else {
-            crearCuentaCliente(nombre, email, password);
-        }
+            if (opc == 1) {
+                fabrica = new FabricaAdmin();
+                System.out.print("Ingrese su clave de administrador: ");
+                datoExtra = sc.nextLine();
 
-        emails.add(email);
-    }
+                Usuario nuevoAdmin = fabrica.crearUsuario(nombre, email, password, datoExtra);
+                admins.add((Admin) nuevoAdmin);
+                System.out.println("Cuenta Admin creada.");
 
-    private static void crearCuentaAdmin(String nombre, String email, String password) {
-        int intentos = 3;
+            } else {
+                fabrica = new FabricaCliente();
+                System.out.print("Fecha de nacimiento (dd/mm/aaaa): ");
+                datoExtra = sc.nextLine();
+                if (datoExtra.trim().isEmpty())
+                    datoExtra = "01/01/2000";
 
-        do {
-            try {
-                System.out.print("Ingrese su clave de administrador (número): ");
-                int clave = sc.nextInt();
-                sc.nextLine();
-
-                Admin nuevoAdmin = new Admin(nombre, email, password, clave);
-                admins.add(nuevoAdmin);
-
-                System.out.println("\nCuenta de administrador creada");
-                finalizar();
-                return;
-
-            } catch (InputMismatchException e) {
-                intentos--;
-                sc.nextLine();
-                System.out.println("Ingrese un número entero para su clave");
-                if (intentos > 0) {
-                    System.out.println("Intentos restantes: " + intentos);
-                }
+                Usuario nuevoCliente = fabrica.crearUsuario(nombre, email, password, datoExtra);
+                clientes.add((Cliente) nuevoCliente);
+                System.out.println("Cuenta Cliente creada.");
             }
-        } while (intentos > 0);
 
-        System.out.println("No se pudo crear la cuenta");
-    }
+            emails.add(email);
+            finalizar();
 
-    private static void crearCuentaCliente(String nombre, String email, String password) {
-        System.out.print("Fecha de nacimiento: ");
-        String fechaNacimiento = sc.nextLine();
-
-        Cliente nuevoCliente;
-        if (fechaNacimiento.trim().isEmpty()) {
-            nuevoCliente = new Cliente(nombre, email, password, "01/01/2000");
-        } else {
-            nuevoCliente = new Cliente(nombre, email, password, fechaNacimiento);
+        } catch (InputMismatchException e) {
+            sc.nextLine();
+            System.out.println("Opción inválida.");
+        } catch (Exception e) {
+            System.out.println("Error al crear usuario: " + e.getMessage());
         }
-
-        clientes.add(nuevoCliente);
-        System.out.println("\nCuenta creada");
-        finalizar();
     }
 
     private static Cliente buscarCliente(String email, String password) {
@@ -206,9 +182,9 @@ public class Sistema {
         return null;
     }
 
-    private static Admin buscarAdmin(String email, String password, int clave) {
+    private static Admin buscarAdmin(String email, String password, String clave) {
         for (Admin a : admins) {
-            if (a.getEmail().equals(email) && a.getPassword().equals(password) && a.getClave() == clave) {
+            if (a.getEmail().equals(email) && a.getPassword().equals(password) && a.getClave().equals(clave)) {
                 return a;
             }
         }
