@@ -11,6 +11,8 @@ public class Cliente extends Usuario {
     private String fechaNacimiento;
     private int puntos;
     private ArrayList<Habito> habitos;
+    private ArrayList<Evento> eventos;
+    private ArrayList<Reto> retos;
     private ArrayList<String> logros;
     private ArrayList<String> items;
 
@@ -18,6 +20,8 @@ public class Cliente extends Usuario {
         super(nombre, email, password);
         this.fechaNacimiento = fechaFormato(fechaNacimiento);
         this.habitos = new ArrayList<>();
+        this.eventos = new ArrayList<>();
+        this.retos = new ArrayList<>();
         this.logros = new ArrayList<>();
         this.items = new ArrayList<>();
         this.puntos = 0;
@@ -53,6 +57,30 @@ public class Cliente extends Usuario {
         habitos.remove(id);
     }
 
+    public ArrayList<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void addEvento(Evento nuevoEvento) {
+        eventos.add(nuevoEvento);
+    }
+
+    public void deleteEvento(int id) {
+        eventos.remove(id);
+    }
+
+    public ArrayList<Reto> getRetos() {
+        return retos;
+    }
+
+    public void addReto(Reto nuevoReto) {
+        retos.add(nuevoReto);
+    }
+
+    public void deleteReto(int id) {
+        retos.remove(id);
+    }
+
     public void agregarLogro(String logro) {
         logros.add(logro);
     }
@@ -74,6 +102,8 @@ public class Cliente extends Usuario {
         System.out.println("Correo: " + this.email);
         System.out.println("Fecha de Nacimiento: " + this.fechaNacimiento);
         System.out.println("Hábitos: " + this.habitos.size());
+        System.out.println("Eventos: " + this.eventos.size());
+        System.out.println("Retos: " + this.retos.size());
         System.out.println("Logros: " + logros.size());
         System.out.println("Items: " + items.size());
         System.out.println("Puntos: " + this.puntos);

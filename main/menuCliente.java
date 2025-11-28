@@ -2,12 +2,17 @@ package main;
 
 import usuarios.Cliente;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import recompensas.Recompensa;
+import tareas.Evento;
 import tareas.Habito;
+import tareas.Reto;
 
 public class menuCliente {
     private static Scanner sc = new Scanner(System.in);
@@ -18,9 +23,67 @@ public class menuCliente {
 
         do {
             try {
-                System.out.println("\n1)Añadir hábito\n2)Ver hábitos\n3)Completar hábito\n4)Eliminar hábito");
-                System.out.println(
-                        "5)Ver estadísticas\n6)Ver puntos\n7)Ver recompensas\n8)Canjear puntos\n0)Cerrar sesión");
+                System.out.println("\n--- MENÚ PRINCIPAL ---");
+                System.out.println("1) Gestionar Hábitos");
+                System.out.println("2) Gestionar Eventos");
+                System.out.println("3) Gestionar Retos");
+                System.out.println("4) Ver estadísticas");
+                System.out.println("5) Ver puntos");
+                System.out.println("6) Ver recompensas");
+                System.out.println("7) Canjear puntos");
+                System.out.println("0) Cerrar sesión");
+                System.out.print("-Ingrese su opción: ");
+                opc = sc.nextInt();
+                sc.nextLine();
+
+                switch (opc) {
+                    case 1:
+                        menuHabitos(cliente);
+                        break;
+                    case 2:
+                        menuEventos(cliente);
+                        break;
+                    case 3:
+                        menuRetos(cliente);
+                        break;
+                    case 4:
+                        estadisticas(cliente);
+                        break;
+                    case 5:
+                        verPuntos(cliente);
+                        break;
+                    case 6:
+                        verRecompensas(cliente);
+                        break;
+                    case 7:
+                        canjearPuntos(cliente);
+                        break;
+                    case 0:
+                        System.out.println("Saliendo del sistema");
+                        break;
+                    default:
+                        System.out.println("Opción inválida");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Excepción: Ingrese un número entero.");
+                sc.nextLine();
+                opc = -1;
+            }
+        } while (opc != 0);
+    }
+
+    public static void menuHabitos(Cliente cliente) {
+        int opc;
+        do {
+            try {
+                System.out.println("\n--- GESTIÓN DE HÁBITOS ---");
+                System.out.println("1) Añadir hábito");
+                System.out.println("2) Ver hábitos");
+                System.out.println("3) Completar hábito");
+                System.out.println("4) Eliminar hábito");
+                System.out.println("0) Volver");
+                System.out.print("-Ingrese su opción: ");
                 opc = sc.nextInt();
                 sc.nextLine();
 
@@ -37,20 +100,92 @@ public class menuCliente {
                     case 4:
                         eliminarHabito(cliente);
                         break;
-                    case 5:
-                        estadisticas(cliente);
+                    case 0:
+                        System.out.println("Regresando al menú principal");
                         break;
-                    case 6:
-                        verPuntos(cliente);
+                    default:
+                        System.out.println("Opción inválida");
                         break;
-                    case 7:
-                        verRecompensas(cliente);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Excepción: Ingrese un número entero");
+                sc.nextLine();
+                opc = -1;
+            }
+        } while (opc != 0);
+    }
+
+    public static void menuEventos(Cliente cliente) {
+        int opc;
+        do {
+            try {
+                System.out.println("\n--- GESTIÓN DE EVENTOS ---");
+                System.out.println("1) Añadir evento");
+                System.out.println("2) Ver eventos");
+                System.out.println("3) Marcar evento como terminado");
+                System.out.println("4) Eliminar evento");
+                System.out.println("0) Volver");
+                System.out.print("-Ingrese su opción: ");
+                opc = sc.nextInt();
+                sc.nextLine();
+
+                switch (opc) {
+                    case 1:
+                        crearEvento(cliente);
                         break;
-                    case 8:
-                        canjearPuntos(cliente);
+                    case 2:
+                        verEventos(cliente);
+                        break;
+                    case 3:
+                        marcarEvento(cliente);
+                        break;
+                    case 4:
+                        eliminarEvento(cliente);
                         break;
                     case 0:
-                        System.out.println("Saliendo del sistema");
+                        System.out.println("Volviendo al menú principal...");
+                        break;
+                    default:
+                        System.out.println("Opción inválida");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Excepción: Ingrese un número entero.");
+                sc.nextLine();
+                opc = -1;
+            }
+        } while (opc != 0);
+    }
+
+    public static void menuRetos(Cliente cliente) {
+        int opc;
+        do {
+            try {
+                System.out.println("\n--- GESTIÓN DE RETOS ---");
+                System.out.println("1) Añadir reto");
+                System.out.println("2) Ver retos");
+                System.out.println("3) Marcar reto como completado");
+                System.out.println("4) Eliminar reto");
+                System.out.println("0) Volver");
+                System.out.print("-Ingrese su opción: ");
+                opc = sc.nextInt();
+                sc.nextLine();
+
+                switch (opc) {
+                    case 1:
+                        crearReto(cliente);
+                        break;
+                    case 2:
+                        verRetos(cliente);
+                        break;
+                    case 3:
+                        marcarReto(cliente);
+                        break;
+                    case 4:
+                        eliminarReto(cliente);
+                        break;
+                    case 0:
+                        System.out.println("Volviendo al menú principal...");
                         break;
                     default:
                         System.out.println("Opción inválida");
@@ -151,6 +286,176 @@ public class menuCliente {
         if (habitos.isEmpty()) {
             System.out.println("\n(Agrega hábitos para ver detalles en tu cuenta)");
             return;
+        }
+    }
+
+    public static void crearEvento(Cliente cliente) {
+        sc.nextLine();
+        System.out.print("Ingrese el título del evento: ");
+        String titulo = sc.nextLine();
+        System.out.print("Añada una descripción del evento: ");
+        String info = sc.nextLine();
+        System.out.print("Ingrese la categoría del evento: ");
+        String categoria = sc.nextLine();
+        System.out.print("Ingrese la duración aproximada del evento: ");
+        String duracion = sc.nextLine();
+        System.out.print("Ingrese la fecha del evento (dd/MM/yyyy): ");
+        String fechaStr = sc.nextLine();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date fecha = formato.parse(fechaStr);
+            Evento nuevoEvento = new Evento(titulo, info, categoria, duracion, fecha);
+            cliente.addEvento(nuevoEvento);
+            System.out.println("Evento creado exitosamente.");
+        } catch (ParseException e) {
+            System.out.println("Error: Formato de fecha inválido. Use dd/MM/yyyy");
+        }
+    }
+
+    public static void verEventos(Cliente cliente) {
+        ArrayList<Evento> listaEventos = cliente.getEventos();
+
+        if (listaEventos.isEmpty()) {
+            System.out.println("No tienes eventos añadidos.");
+            return;
+        } else {
+            for (int i = 0; i < listaEventos.size(); i++) {
+                System.out.println(i + ") " + listaEventos.get(i));
+            }
+        }
+    }
+
+    public static void marcarEvento(Cliente cliente) {
+        ArrayList<Evento> listaEventos = cliente.getEventos();
+
+        if (listaEventos.isEmpty()) {
+            System.out.println("No tienes eventos añadidos.");
+            return;
+        }
+
+        verEventos(cliente);
+
+        System.out.print("Seleccione un evento: ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        if (opc >= 0 && opc < listaEventos.size()) {
+            Evento evento = listaEventos.get(opc);
+            if (evento.estadoEvento()) {
+                System.out.println("Este evento ya está marcado como terminado.");
+            } else {
+                evento.eventoTerminado();
+                System.out.println("Evento marcado como terminado.");
+
+                int puntosGanados = 30;
+                cliente.agregarPuntos(puntosGanados);
+                System.out.println("Has ganado " + puntosGanados + " puntos");
+            }
+        } else {
+            System.out.println("Opción inválida.");
+        }
+    }
+
+    public static void eliminarEvento(Cliente cliente) {
+        ArrayList<Evento> listaEventos = cliente.getEventos();
+
+        if (listaEventos.isEmpty()) {
+            System.out.println("No tienes eventos añadidos.");
+            return;
+        }
+
+        verEventos(cliente);
+        System.out.print("Seleccione un evento: ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        if (opc >= 0 && opc < listaEventos.size()) {
+            listaEventos.remove(opc);
+            System.out.println("Evento eliminado.");
+        } else {
+            System.out.println("Opción inválida.");
+        }
+    }
+
+    public static void crearReto(Cliente cliente) {
+        sc.nextLine();
+        System.out.print("Ingrese el título del reto: ");
+        String titulo = sc.nextLine();
+        System.out.print("Añada una descripción del reto: ");
+        String info = sc.nextLine();
+        System.out.print("Ingrese la categoría del reto: ");
+        String categoria = sc.nextLine();
+        System.out.print("Ingrese la duración aproximada del reto: ");
+        String duracion = sc.nextLine();
+
+        Reto nuevoReto = new Reto(titulo, info, categoria, duracion);
+        cliente.addReto(nuevoReto);
+        System.out.println("Reto creado exitosamente.");
+    }
+
+    public static void verRetos(Cliente cliente) {
+        ArrayList<Reto> listaRetos = cliente.getRetos();
+
+        if (listaRetos.isEmpty()) {
+            System.out.println("No tienes retos añadidos.");
+            return;
+        } else {
+            for (int i = 0; i < listaRetos.size(); i++) {
+                System.out.println(i + ") " + listaRetos.get(i));
+            }
+        }
+    }
+
+    public static void marcarReto(Cliente cliente) {
+        ArrayList<Reto> listaRetos = cliente.getRetos();
+
+        if (listaRetos.isEmpty()) {
+            System.out.println("No tienes retos añadidos.");
+            return;
+        }
+
+        verRetos(cliente);
+
+        System.out.print("Seleccione un reto: ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        if (opc >= 0 && opc < listaRetos.size()) {
+            Reto reto = listaRetos.get(opc);
+            if (reto.isCompletado()) {
+                System.out.println("Este reto ya está marcado como completado.");
+            } else {
+                reto.marcarCompletado();
+                System.out.println("Reto marcado como completado.");
+
+                int puntosGanados = 50;
+                cliente.agregarPuntos(puntosGanados);
+                System.out.println("Has ganado " + puntosGanados + " puntos");
+            }
+        } else {
+            System.out.println("Opción inválida.");
+        }
+    }
+
+    public static void eliminarReto(Cliente cliente) {
+        ArrayList<Reto> listaRetos = cliente.getRetos();
+
+        if (listaRetos.isEmpty()) {
+            System.out.println("No tienes retos añadidos.");
+            return;
+        }
+
+        verRetos(cliente);
+        System.out.print("Seleccione un reto: ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        if (opc >= 0 && opc < listaRetos.size()) {
+            listaRetos.remove(opc);
+            System.out.println("Reto eliminado.");
+        } else {
+            System.out.println("Opción inválida.");
         }
     }
 
