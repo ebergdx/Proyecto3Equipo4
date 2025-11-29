@@ -49,12 +49,9 @@ public class menuAdmin {
                         estadisticasUsuarios();
                         break;
                     case 6:
-                        crearTarea();
-                        break;
-                    case 7:
                         editarRecompensas();
                         break;
-                    case 0:
+                    case 7:
                         System.out.println("Saliendo del sistema");
                         break;
                     default:
@@ -270,7 +267,4 @@ public class menuAdmin {
         }
     }
 
-    private static void crearTarea() {
-        System.out.println("\n--- Crear Tarea ---");
-    }
 }
