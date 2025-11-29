@@ -21,14 +21,14 @@ public class menuAdmin {
     private static Scanner sc = new Scanner(System.in);
 
     public static void Administrar(Admin admin) {
-        System.out.println("\n-- Bienvenido al menú de administración --");
+        System.out.println("\n-- Menú de administración --");
         int opc;
 
         do {
             try {
                 System.out.println(
                         "\n1)Crear Recompensas\n2)Ver Recompensas\n3)Analizar registro de usuarios\n4)Analizar categorías de tareas");
-                System.out.println("5)Ver estadísticas\n6)Crear evento o tarea\n7)Editar recompensas\n0)Cerrar sesión");
+                System.out.println("5)Ver estadísticas\n\n6)Editar recompensas\n0)Cerrar sesión");
                 opc = sc.nextInt();
                 sc.nextLine();
 
@@ -51,7 +51,7 @@ public class menuAdmin {
                     case 6:
                         editarRecompensas();
                         break;
-                    case 7:
+                    case 0:
                         System.out.println("Saliendo del sistema");
                         break;
                     default:
@@ -59,7 +59,7 @@ public class menuAdmin {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Excepción: Ingrese un número entero.");
+                System.out.println("Excepción: Ingrese un número entero");
                 sc.nextLine();
                 opc = -1;
             }
@@ -68,7 +68,7 @@ public class menuAdmin {
 
     private static void crearRecompensa() {
         sc.nextLine();
-        System.out.println("-- Crear Nueva Recompens --");
+        System.out.println("-- Crear Recompensas --");
 
         System.out.println("Ingrese el nombre de la recompensa (Ej: 'Medalla de Bronce'):");
         String nombre = sc.nextLine();
@@ -103,7 +103,7 @@ public class menuAdmin {
         recompensas.add(nueva);
         ControlArchivos.guardarRecompensas(recompensas);
 
-        System.out.println("Recompensa creada exitosamente.");
+        System.out.println("Recompensa creada :)");
     }
 
     private static void verRecompensas() {
@@ -123,7 +123,7 @@ public class menuAdmin {
     }
 
     private static void editarRecompensas() {
-        System.out.println("\n--- Editar Recompensas ---");
+        System.out.println("\n-- Editar Recompensas --");
         ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
 
         if (recompensas.isEmpty()) {
@@ -149,7 +149,7 @@ public class menuAdmin {
     }
 
     private static void registroUsuarios() {
-        System.out.println("\n--- Registro de Usuarios ---");
+        System.out.println("\n-- Registro de Usuarios --");
         ArrayList<Cliente> clientes = Sistema.clientes;
         ArrayList<Admin> admins = Sistema.admins;
 
@@ -167,7 +167,7 @@ public class menuAdmin {
     }
 
     private static void categoriasTareas() {
-        System.out.println("\n--- Análisis de Categorías de Tareas ---");
+        System.out.println("\n-- Estadísticas de Tareas --");
         ArrayList<Cliente> clientes = Sistema.clientes;
 
         Map<String, Integer> categoriasHabitos = new HashMap<>();
@@ -217,7 +217,7 @@ public class menuAdmin {
     }
 
     private static void estadisticasUsuarios() {
-        System.out.println("\n--- Estadísticas Generales ---");
+        System.out.println("\n-- Estadísticas Generales --");
         ArrayList<Cliente> clientes = Sistema.clientes;
 
         int totalHabitos = 0;

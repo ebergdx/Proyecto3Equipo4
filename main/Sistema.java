@@ -83,7 +83,7 @@ public class Sistema {
             } catch (InputMismatchException e) {
                 intentos--;
                 sc.nextLine();
-                System.out.println("Excepción: Solo puede usar números enteros para la contraseña.");
+                System.out.println("Excepción: Solo puede usar números enteros para la contraseña");
                 if (intentos > 0) {
                     System.out.println("Inténtelo nuevamente");
                 }
@@ -148,7 +148,7 @@ public class Sistema {
 
                 Usuario nuevoAdmin = fabrica.crearUsuario(nombre, email, password, datoExtra);
                 admins.add((Admin) nuevoAdmin);
-                System.out.println("Cuenta Admin creada.");
+                System.out.println("Cuenta de administrador creada");
 
             } else {
                 fabrica = new FabricaCliente();
@@ -159,7 +159,7 @@ public class Sistema {
 
                 Usuario nuevoCliente = fabrica.crearUsuario(nombre, email, password, datoExtra);
                 clientes.add((Cliente) nuevoCliente);
-                System.out.println("Cuenta Cliente creada.");
+                System.out.println("Cuenta de cliente creada");
             }
 
             emails.add(email);
@@ -167,7 +167,7 @@ public class Sistema {
 
         } catch (InputMismatchException e) {
             sc.nextLine();
-            System.out.println("Opción inválida.");
+            System.out.println("Opción inválida");
         } catch (Exception e) {
             System.out.println("Error al crear usuario: " + e.getMessage());
         }

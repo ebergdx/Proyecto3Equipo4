@@ -18,7 +18,7 @@ public class menuCliente {
     private static Scanner sc = new Scanner(System.in);
 
     public static void AppCliente(Cliente cliente) {
-        System.out.println("\n\t-- Bienvenido a la aplicación --");
+        System.out.println("\n-- Bienvenido a la Agenda Antiprocrastinación --");
         int opc;
 
         do {
@@ -66,7 +66,7 @@ public class menuCliente {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Excepción: Ingrese un número entero.");
+                System.out.println("Excepción: Ingrese un número entero");
                 sc.nextLine();
                 opc = -1;
             }
@@ -77,7 +77,7 @@ public class menuCliente {
         int opc;
         do {
             try {
-                System.out.println("\n--- GESTIÓN DE HÁBITOS ---");
+                System.out.println("\n-- Gestionar Hábitos --");
                 System.out.println("1) Añadir hábito");
                 System.out.println("2) Ver hábitos");
                 System.out.println("3) Completar hábito");
@@ -119,7 +119,7 @@ public class menuCliente {
         int opc;
         do {
             try {
-                System.out.println("\n--- GESTIÓN DE EVENTOS ---");
+                System.out.println("\n-- Gestionar Eventos --");
                 System.out.println("1) Añadir evento");
                 System.out.println("2) Ver eventos");
                 System.out.println("3) Marcar evento como terminado");
@@ -143,14 +143,14 @@ public class menuCliente {
                         eliminarEvento(cliente);
                         break;
                     case 0:
-                        System.out.println("Volviendo al menú principal...");
+                        System.out.println("Volviendo al menú prinicpal");
                         break;
                     default:
                         System.out.println("Opción inválida");
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Excepción: Ingrese un número entero.");
+                System.out.println("Excepción: Ingrese un número entero");
                 sc.nextLine();
                 opc = -1;
             }
@@ -161,7 +161,7 @@ public class menuCliente {
         int opc;
         do {
             try {
-                System.out.println("\n--- GESTIÓN DE RETOS ---");
+                System.out.println("\n-- Gestionar Retos --");
                 System.out.println("1) Añadir reto");
                 System.out.println("2) Ver retos");
                 System.out.println("3) Marcar reto como completado");
@@ -185,14 +185,14 @@ public class menuCliente {
                         eliminarReto(cliente);
                         break;
                     case 0:
-                        System.out.println("Volviendo al menú principal...");
+                        System.out.println("Regresando al menú principal");
                         break;
                     default:
                         System.out.println("Opción inválida");
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Excepción: Ingrese un número entero.");
+                System.out.println("Excepción: Ingrese un número entero");
                 sc.nextLine();
                 opc = -1;
             }
@@ -218,7 +218,7 @@ public class menuCliente {
         ArrayList<Habito> listaHabitos = cliente.getHabitos();
 
         if (listaHabitos.isEmpty()) {
-            System.out.println("No tienes hábitos añadidos.");
+            System.out.println("No tienes hábitos añadidos");
             return;
         } else {
             for (int i = 0; i < listaHabitos.size(); i++) {
@@ -231,7 +231,7 @@ public class menuCliente {
         ArrayList<Habito> listaHabitos = cliente.getHabitos();
 
         if (listaHabitos.isEmpty()) {
-            System.out.println("No tienes hábitos añadidos.");
+            System.out.println("No tienes hábitos añadidos");
             return;
         }
 
@@ -243,13 +243,13 @@ public class menuCliente {
 
         if (opc >= 0 && opc < listaHabitos.size()) {
             listaHabitos.get(opc).diaRacha();
-            System.out.println("Hábito completado este día.");
+            System.out.println("Hábito completado este día");
 
             int puntosGanados = 20;
             cliente.agregarPuntos(puntosGanados);
             System.out.println("Has ganado " + puntosGanados + " puntos");
         } else {
-            System.out.println("Opción inválida.");
+            System.out.println("Opción inválida");
         }
     }
 
@@ -257,7 +257,7 @@ public class menuCliente {
         ArrayList<Habito> listaHabitos = cliente.getHabitos();
 
         if (listaHabitos.isEmpty()) {
-            System.out.println("No tienes hábitos añadidos.");
+            System.out.println("No tienes hábitos añadidos");
             return;
         }
 
@@ -267,7 +267,7 @@ public class menuCliente {
 
         if (opc >= 0 && opc < listaHabitos.size()) {
             listaHabitos.remove(opc);
-            System.out.println("Hábito eliminado.");
+            System.out.println("Hábito eliminado");
         } else {
             System.out.println("Opción inválida.");
         }
@@ -307,7 +307,7 @@ public class menuCliente {
             Date fecha = formato.parse(fechaStr);
             Evento nuevoEvento = new Evento(titulo, info, categoria, duracion, fecha);
             cliente.addEvento(nuevoEvento);
-            System.out.println("Evento creado exitosamente.");
+            System.out.println("Evento creado");
         } catch (ParseException e) {
             System.out.println("Error: Formato de fecha inválido. Use dd/MM/yyyy");
         }
@@ -317,7 +317,7 @@ public class menuCliente {
         ArrayList<Evento> listaEventos = cliente.getEventos();
 
         if (listaEventos.isEmpty()) {
-            System.out.println("No tienes eventos añadidos.");
+            System.out.println("No tienes eventos añadidos");
             return;
         } else {
             for (int i = 0; i < listaEventos.size(); i++) {
@@ -330,7 +330,7 @@ public class menuCliente {
         ArrayList<Evento> listaEventos = cliente.getEventos();
 
         if (listaEventos.isEmpty()) {
-            System.out.println("No tienes eventos añadidos.");
+            System.out.println("No tienes eventos añadidos");
             return;
         }
 
@@ -343,7 +343,7 @@ public class menuCliente {
         if (opc >= 0 && opc < listaEventos.size()) {
             Evento evento = listaEventos.get(opc);
             if (evento.estadoEvento()) {
-                System.out.println("Este evento ya está marcado como terminado.");
+                System.out.println("Este evento ya está marcado como terminado");
             } else {
                 evento.eventoTerminado();
                 System.out.println("Evento marcado como terminado.");
@@ -353,7 +353,7 @@ public class menuCliente {
                 System.out.println("Has ganado " + puntosGanados + " puntos");
             }
         } else {
-            System.out.println("Opción inválida.");
+            System.out.println("Opción inválida");
         }
     }
 
@@ -361,7 +361,7 @@ public class menuCliente {
         ArrayList<Evento> listaEventos = cliente.getEventos();
 
         if (listaEventos.isEmpty()) {
-            System.out.println("No tienes eventos añadidos.");
+            System.out.println("No tienes eventos añadidos");
             return;
         }
 
@@ -391,7 +391,7 @@ public class menuCliente {
 
         Reto nuevoReto = new Reto(titulo, info, categoria, duracion);
         cliente.addReto(nuevoReto);
-        System.out.println("Reto creado exitosamente.");
+        System.out.println("Reto creado");
     }
 
     public static void verRetos(Cliente cliente) {
@@ -411,7 +411,7 @@ public class menuCliente {
         ArrayList<Reto> listaRetos = cliente.getRetos();
 
         if (listaRetos.isEmpty()) {
-            System.out.println("No tienes retos añadidos.");
+            System.out.println("No tienes retos añadidos");
             return;
         }
 
@@ -424,17 +424,17 @@ public class menuCliente {
         if (opc >= 0 && opc < listaRetos.size()) {
             Reto reto = listaRetos.get(opc);
             if (reto.isCompletado()) {
-                System.out.println("Este reto ya está marcado como completado.");
+                System.out.println("Este reto ya está marcado como completado");
             } else {
                 reto.marcarCompletado();
-                System.out.println("Reto marcado como completado.");
+                System.out.println("Reto marcado como completado");
 
                 int puntosGanados = 50;
                 cliente.agregarPuntos(puntosGanados);
                 System.out.println("Has ganado " + puntosGanados + " puntos");
             }
         } else {
-            System.out.println("Opción inválida.");
+            System.out.println("Opción inválida");
         }
     }
 
@@ -442,7 +442,7 @@ public class menuCliente {
         ArrayList<Reto> listaRetos = cliente.getRetos();
 
         if (listaRetos.isEmpty()) {
-            System.out.println("No tienes retos añadidos.");
+            System.out.println("No tienes retos añadidos");
             return;
         }
 
@@ -453,9 +453,9 @@ public class menuCliente {
 
         if (opc >= 0 && opc < listaRetos.size()) {
             listaRetos.remove(opc);
-            System.out.println("Reto eliminado.");
+            System.out.println("Reto eliminado");
         } else {
-            System.out.println("Opción inválida.");
+            System.out.println("Opción inválida");
         }
     }
 
@@ -467,11 +467,11 @@ public class menuCliente {
         ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
 
         if (recompensas.isEmpty()) {
-            System.out.println("No hay recompensas disponibles en la tienda.");
+            System.out.println("No hay recompensas disponibles en la tienda");
             return;
         }
 
-        System.out.println("Tienes: " + cliente.getPuntos() + " puntos.");
+        System.out.println("Tienes: " + cliente.getPuntos() + " puntos");
         for (Recompensa r : recompensas) {
             System.out.printf("* [%s] %s - Costo: %d puntos\n",
                     r.getTipo(), r.getNombre(), r.getCosto());
@@ -480,7 +480,7 @@ public class menuCliente {
 
     public static void canjearPuntos(Cliente cliente) {
         sc.nextLine();
-        System.out.println("--- Canjear Recompensas ---");
+        System.out.println("-- Canjear Recompensas --");
 
         ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
 
@@ -501,7 +501,7 @@ public class menuCliente {
         int opc = sc.nextInt();
 
         if (opc < 0 || opc >= recompensas.size()) {
-            System.out.println("Selección inválida o cancelada");
+            System.out.println("Selección inválida");
             return;
         }
 
@@ -516,7 +516,7 @@ public class menuCliente {
 
         } else {
             System.out.println("Puntos insuficientes. Te faltan " +
-                    (recompensaElegida.getCosto() - cliente.getPuntos()) + " puntos.");
+                    (recompensaElegida.getCosto() - cliente.getPuntos()) + " puntos");
         }
     }
 }

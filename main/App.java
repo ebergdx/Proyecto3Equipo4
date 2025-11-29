@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) {
         Sistema.inicializar();
 
-        System.out.println("- Bienvenido a la aplicación para registrar hábitos -");
+        System.out.println("-- Bienvenido a la Agenda Antiprocrastinación --");
         int opc;
 
         do {
@@ -26,7 +26,7 @@ public class App {
                     default -> System.out.println("Ingrese una opción válida");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Excepción: Ingrese un número entero.");
+                System.out.println("Excepción: Ingrese un número entero");
                 sc.nextLine();
                 opc = 9;
             }
