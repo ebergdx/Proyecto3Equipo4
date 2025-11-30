@@ -6,6 +6,8 @@ import java.util.Date;
 
 import excepciones.PuntosInsuficientes;
 import tareas.*;
+import eventos.GestorEventos;
+import eventos.EventoUsuario;
 
 public class Cliente extends Usuario {
     private String fechaNacimiento;
@@ -34,6 +36,11 @@ public class Cliente extends Usuario {
     public void agregarPuntos(int pts) {
         if (pts > 0) {
             this.puntos += pts;
+            
+            if (pts > 0) {
+                GestorEventos gestor = GestorEventos.getInstancia();
+                gestor.notificarEvento(new EventoUsuario(EventoUsuario.puntosGanados, this, pts,"Puntos ganados: " + pts));
+            }
         }
     }
 
@@ -124,6 +131,52 @@ public class Cliente extends Usuario {
             return formato.format(fechaNacimiento);
         } catch (Exception e) {
             return "Fecha Inválida";
+        }
+    }
+
+    public void completarHabito(int indiceHabito) {
+        if (indiceHabito >= 0 && indiceHabito < habitos.size()) {
+            Habito habito = habitos.get(indiceHabito);
+            habito.diaRacha();
+            
+            GestorEventos gestor = GestorEventos.getInstancia();
+            gestor.notificarEvento(new EventoUsuario(
+                EventoUsuario.habitoCompletado, 
+                this, 
+                20,
+                "Habito completado: " + habito.getTitulo()
+            ));
+            
+            agregarPuntos(20);
+        }
+    }
+    
+    public void completarEvento(int indiceEvento) {
+        if (indiceEvento >= 0 && indiceEvento < eventos.size()) {
+            Evento evento = eventos.get(indiceEvento);
+            evento.eventoTerminado();
+            
+            GestorEventos gestor = GestorEventos.getInstancia();
+            gestor.notificarEvento(new EventoUsuario(
+                EventoUsuario.eventoTerminado, 
+                this, 
+                30,
+                "Evento completado: " + evento.getTitulo()
+            ));
+            
+            agregarPuntos(30);
+        }
+    }
+    
+    public void completarReto(int indiceReto) {
+        if (indiceReto >= 0 && indiceReto < retos.size()) {
+            Reto reto = retos.get(indiceReto);
+            reto.marcarCompletado();
+            
+            GestorEventos gestor = GestorEventos.getInstancia();
+            gestor.notificarEvento(new EventoUsuario(EventoUsuario.retoCompletado, this, 50,"Reto completado: " + reto.getTitulo() ));
+            
+            agregarPuntos(50);
         }
     }
 }
