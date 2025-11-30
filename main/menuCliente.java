@@ -247,12 +247,9 @@ public class menuCliente {
         sc.nextLine();
 
         if (opc >= 0 && opc < listaHabitos.size()) {
-            listaHabitos.get(opc).diaRacha();
+            cliente.completarHabito(opc);
             System.out.println("Hábito completado este día");
 
-            int puntosGanados = 20;
-            cliente.agregarPuntos(puntosGanados);
-            System.out.println("Has ganado " + puntosGanados + " puntos");
         } else {
             System.out.println("Opción inválida");
         }
@@ -351,12 +348,8 @@ public class menuCliente {
             if (evento.estadoEvento()) {
                 System.out.println("Este evento ya está marcado como terminado");
             } else {
-                evento.eventoTerminado();
+                cliente.completarEvento(opc);
                 System.out.println("Evento marcado como terminado.");
-
-                int puntosGanados = 30;
-                cliente.agregarPuntos(puntosGanados);
-                System.out.println("Has ganado " + puntosGanados + " puntos");
             }
         } else {
             System.out.println("Opción inválida");
@@ -433,12 +426,8 @@ public class menuCliente {
             if (reto.isCompletado()) {
                 System.out.println("Este reto ya está marcado como completado");
             } else {
-                reto.marcarCompletado();
+                cliente.completarReto(opc);
                 System.out.println("Reto marcado como completado");
-
-                int puntosGanados = 50;
-                cliente.agregarPuntos(puntosGanados);
-                System.out.println("Has ganado " + puntosGanados + " puntos");
             }
         } else {
             System.out.println("Opción inválida");
