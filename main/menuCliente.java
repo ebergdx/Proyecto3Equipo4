@@ -395,7 +395,8 @@ public class menuCliente {
         System.out.print("Ingrese la duración aproximada del reto: ");
         String duracion = sc.nextLine();
 
-        Reto nuevoReto = new Reto(titulo, info, categoria, duracion);
+        CreadorTarea creador = new CreadorReto();
+        Reto nuevoReto = (Reto) creador.crearYConfigurarTarea(titulo, info, categoria, duracion);
         cliente.addReto(nuevoReto);
         System.out.println("Reto creado");
     }
