@@ -214,7 +214,8 @@ public class menuCliente {
         System.out.print("Ingrese la categoría del hábito.");
         String categoria = sc.nextLine();
 
-        Habito nuevoHabito = new Habito(nombre, info, frecuencia, categoria);
+        CreadorTarea creador = new CreadorHabito();
+        Habito nuevoHabito = (Habito) creador.crearYConfigurarTarea(nombre, info, categoria, frecuencia);
         cliente.addHabito(nuevoHabito);
     }
 
