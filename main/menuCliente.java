@@ -13,6 +13,10 @@ import recompensas.Recompensa;
 import tareas.Evento;
 import tareas.Habito;
 import tareas.Reto;
+import tareas.CreadorTarea;
+import tareas.CreadorHabito;
+import tareas.CreadorEvento;
+import tareas.CreadorReto;
 
 public class menuCliente {
     private static Scanner sc = new Scanner(System.in);
