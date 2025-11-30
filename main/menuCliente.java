@@ -310,7 +310,8 @@ public class menuCliente {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date fecha = formato.parse(fechaStr);
-            Evento nuevoEvento = new Evento(titulo, info, categoria, duracion, fecha);
+            CreadorTarea creador = new CreadorEvento(fecha);
+            Evento nuevoEvento = (Evento) creador.crearYConfigurarTarea(titulo, info, categoria, duracion);
             cliente.addEvento(nuevoEvento);
             System.out.println("Evento creado");
         } catch (ParseException e) {
