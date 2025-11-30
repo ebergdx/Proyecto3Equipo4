@@ -28,7 +28,7 @@ public class menuAdmin {
             try {
                 System.out.println(
                         "\n1)Crear Recompensas\n2)Ver Recompensas\n3)Analizar registro de usuarios\n4)Analizar categorías de tareas");
-                System.out.println("5)Ver estadísticas\n\n6)Editar recompensas\n0)Cerrar sesión");
+                System.out.println("5)Ver estadísticas\n6)Editar recompensas\n0)Cerrar sesión");
                 opc = sc.nextInt();
                 sc.nextLine();
 
