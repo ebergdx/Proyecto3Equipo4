@@ -2,12 +2,16 @@ package main;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import eventos.GestorEventos;
+import eventos.ObservadorLogros;
+import eventos.ObservadorEstadisticas;
 
 public class App {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         Sistema.inicializar();
+        configurarSistemaEventos();
 
         System.out.println("-- Bienvenido a la Agenda Antiprocrastinación --");
         int opc;
@@ -35,4 +39,13 @@ public class App {
         Sistema.finalizar();
         sc.close();
     }
+
+    private static void configurarSistemaEventos() {
+        GestorEventos gestor = GestorEventos.getInstancia();
+        gestor.agregarObservador(new ObservadorLogros());
+        gestor.agregarObservador(new ObservadorEstadisticas());
+        
+        System.out.println("Sistema de eventos configurado");
+    }
+    
 }
