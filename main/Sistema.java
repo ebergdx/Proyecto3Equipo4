@@ -18,10 +18,10 @@ public class Sistema {
         clientes = ControlArchivos.cargarClientes();
         admins = ControlArchivos.cargarAdmins();
 
-        for (Cliente c : clientes) {
+        for(Cliente c : clientes) {
             emails.add(c.getEmail());
         }
-        for (Admin a : admins) {
+        for(Admin a : admins) {
             emails.add(a.getEmail());
         }
     }
