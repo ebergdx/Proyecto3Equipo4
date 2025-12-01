@@ -10,13 +10,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import recompensas.Recompensa;
-import tareas.Evento;
-import tareas.Habito;
-import tareas.Reto;
-import tareas.CreadorTarea;
-import tareas.CreadorHabito;
-import tareas.CreadorEvento;
-import tareas.CreadorReto;
+import tareas.*;
+import excepciones.*;
 
 public class menuCliente {
     private static Scanner sc = new Scanner(System.in);
@@ -112,8 +107,20 @@ public class menuCliente {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Excepción: Ingrese un número entero");
+                System.out.println("Excepción: Ingrese un número entero.");
                 sc.nextLine();
+                opc = -1;
+            } catch (ListaEventosVacia e) {
+                System.out.println(e.getMessage());
+                opc = -1;
+            } catch (ListaTareasVacia e) {
+                System.out.println(e.getMessage());
+                opc = -1;
+            } catch (ListaRecompensasVacia e) {
+                System.out.println(e.getMessage());
+                opc = -1;
+            } catch (IndiceNoPermitido e) {
+                System.out.println(e.getMessage());
                 opc = -1;
             }
         } while (opc != 0);
@@ -156,6 +163,18 @@ public class menuCliente {
             } catch (InputMismatchException e) {
                 System.out.println("Excepción: Ingrese un número entero");
                 sc.nextLine();
+                opc = -1;
+            } catch (ListaEventosVacia e) {
+                System.out.println(e.getMessage());
+                opc = -1;
+            } catch (ListaTareasVacia e) {
+                System.out.println(e.getMessage());
+                opc = -1;
+            } catch (ListaRecompensasVacia e) {
+                System.out.println(e.getMessage());
+                opc = -1;
+            } catch (IndiceNoPermitido e) {
+                System.out.println(e.getMessage());
                 opc = -1;
             }
         } while (opc != 0);
@@ -207,27 +226,26 @@ public class menuCliente {
         sc.nextLine();
         System.out.print("Ingrese el nombre: ");
         String nombre = sc.nextLine();
-        System.out.print("Añada una descripción del hábito.");
+        System.out.print("Añada una descripción del hábito: ");
         String info = sc.nextLine();
-        System.out.print("Añada la frecuencia del hábito.");
+        System.out.print("Añada la frecuencia del hábito: ");
         String frecuencia = sc.nextLine();
-        System.out.print("Ingrese la categoría del hábito.");
+        System.out.print("Ingrese la categoría del hábito: ");
         String categoria = sc.nextLine();
 
-        CreadorTarea creador = new CreadorHabito();
-        Habito nuevoHabito = (Habito) creador.crearYConfigurarTarea(nombre, info, categoria, frecuencia);
+        FabAbsTareas creador = new FabricaHabito();
+        Habito nuevoHabito = (Habito) creador.crearTarea(nombre, info, categoria, frecuencia);
         cliente.addHabito(nuevoHabito);
     }
 
     public static void verHabitos(Cliente cliente) {
         ArrayList<Habito> listaHabitos = cliente.getHabitos();
 
-        if (listaHabitos.isEmpty()) {
-            System.out.println("No tienes hábitos añadidos");
-            return;
+        if(listaHabitos.isEmpty()) {
+            throw new ListaTareasVacia();
         } else {
-            for (int i = 0; i < listaHabitos.size(); i++) {
-                System.out.println(listaHabitos.get(i));
+            for(int i = 0; i < listaHabitos.size(); i++) {
+                System.out.println("[" + i +"]" + listaHabitos.get(i));
             }
         }
     }
@@ -235,9 +253,8 @@ public class menuCliente {
     public static void marcarHabito(Cliente cliente) {
         ArrayList<Habito> listaHabitos = cliente.getHabitos();
 
-        if (listaHabitos.isEmpty()) {
-            System.out.println("No tienes hábitos añadidos");
-            return;
+        if(listaHabitos.isEmpty()) {
+            throw new ListaTareasVacia();
         }
 
         verHabitos(cliente);
@@ -246,12 +263,12 @@ public class menuCliente {
         int opc = sc.nextInt();
         sc.nextLine();
 
-        if (opc >= 0 && opc < listaHabitos.size()) {
+        if(opc >= 0 && opc < listaHabitos.size()) {
             cliente.completarHabito(opc);
             System.out.println("Hábito completado este día");
 
         } else {
-            System.out.println("Opción inválida");
+            throw new IndiceNoPermitido();
         }
     }
 
@@ -259,19 +276,18 @@ public class menuCliente {
         ArrayList<Habito> listaHabitos = cliente.getHabitos();
 
         if (listaHabitos.isEmpty()) {
-            System.out.println("No tienes hábitos añadidos");
-            return;
+            throw new ListaTareasVacia();
         }
 
         verHabitos(cliente);
         System.out.println("Seleccione un hábito: ");
         int opc = sc.nextInt();
 
-        if (opc >= 0 && opc < listaHabitos.size()) {
+        if(opc >= 0 && opc < listaHabitos.size()) {
             listaHabitos.remove(opc);
             System.out.println("Hábito eliminado");
         } else {
-            System.out.println("Opción inválida.");
+            throw new IndiceNoPermitido();
         }
     }
 
@@ -285,9 +301,8 @@ public class menuCliente {
         System.out.println("Logros desbloqueados: " + cliente.getLogros().size());
         System.out.println("Items en inventario: " + cliente.getItems().size());
 
-        if (habitos.isEmpty()) {
-            System.out.println("\n(Agrega hábitos para ver detalles en tu cuenta)");
-            return;
+        if(habitos.isEmpty()) {
+            throw new IndiceNoPermitido();
         }
     }
 
@@ -307,8 +322,8 @@ public class menuCliente {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date fecha = formato.parse(fechaStr);
-            CreadorTarea creador = new CreadorEvento(fecha);
-            Evento nuevoEvento = (Evento) creador.crearYConfigurarTarea(titulo, info, categoria, duracion);
+            FabAbsTareas creador = new FabricaEvento(fecha);
+            Evento nuevoEvento = (Evento) creador.crearTarea(titulo, info, categoria, duracion);
             cliente.addEvento(nuevoEvento);
             System.out.println("Evento creado");
         } catch (ParseException e) {
@@ -319,12 +334,11 @@ public class menuCliente {
     public static void verEventos(Cliente cliente) {
         ArrayList<Evento> listaEventos = cliente.getEventos();
 
-        if (listaEventos.isEmpty()) {
-            System.out.println("No tienes eventos añadidos");
-            return;
+        if(listaEventos.isEmpty()) {
+            throw new ListaEventosVacia();
         } else {
-            for (int i = 0; i < listaEventos.size(); i++) {
-                System.out.println(i + ") " + listaEventos.get(i));
+            for(int i = 0; i < listaEventos.size(); i++) {
+                System.out.println("["+ i + "] " + listaEventos.get(i));
             }
         }
     }
@@ -332,9 +346,8 @@ public class menuCliente {
     public static void marcarEvento(Cliente cliente) {
         ArrayList<Evento> listaEventos = cliente.getEventos();
 
-        if (listaEventos.isEmpty()) {
-            System.out.println("No tienes eventos añadidos");
-            return;
+        if(listaEventos.isEmpty()) {
+            throw new ListaEventosVacia();
         }
 
         verEventos(cliente);
@@ -343,25 +356,24 @@ public class menuCliente {
         int opc = sc.nextInt();
         sc.nextLine();
 
-        if (opc >= 0 && opc < listaEventos.size()) {
+        if(opc >= 0 && opc < listaEventos.size()) {
             Evento evento = listaEventos.get(opc);
-            if (evento.estadoEvento()) {
+            if(evento.estadoEvento()) {
                 System.out.println("Este evento ya está marcado como terminado");
             } else {
                 cliente.completarEvento(opc);
                 System.out.println("Evento marcado como terminado.");
             }
         } else {
-            System.out.println("Opción inválida");
+            throw new ListaEventosVacia();
         }
     }
 
     public static void eliminarEvento(Cliente cliente) {
         ArrayList<Evento> listaEventos = cliente.getEventos();
 
-        if (listaEventos.isEmpty()) {
-            System.out.println("No tienes eventos añadidos");
-            return;
+        if(listaEventos.isEmpty()) {
+            throw new ListaEventosVacia();
         }
 
         verEventos(cliente);
@@ -369,11 +381,11 @@ public class menuCliente {
         int opc = sc.nextInt();
         sc.nextLine();
 
-        if (opc >= 0 && opc < listaEventos.size()) {
+        if(opc >= 0 && opc < listaEventos.size()) {
             listaEventos.remove(opc);
             System.out.println("Evento eliminado.");
         } else {
-            System.out.println("Opción inválida.");
+            throw new IndiceNoPermitido();
         }
     }
 
@@ -388,8 +400,8 @@ public class menuCliente {
         System.out.print("Ingrese la duración aproximada del reto: ");
         String duracion = sc.nextLine();
 
-        CreadorTarea creador = new CreadorReto();
-        Reto nuevoReto = (Reto) creador.crearYConfigurarTarea(titulo, info, categoria, duracion);
+        FabAbsTareas creador = new FabricaReto();
+        Reto nuevoReto = (Reto) creador.crearTarea(titulo, info, categoria, duracion);
         cliente.addReto(nuevoReto);
         System.out.println("Reto creado");
     }
@@ -397,12 +409,11 @@ public class menuCliente {
     public static void verRetos(Cliente cliente) {
         ArrayList<Reto> listaRetos = cliente.getRetos();
 
-        if (listaRetos.isEmpty()) {
-            System.out.println("No tienes retos añadidos.");
-            return;
+        if(listaRetos.isEmpty()) {
+            throw new ListaEventosVacia();
         } else {
-            for (int i = 0; i < listaRetos.size(); i++) {
-                System.out.println(i + ") " + listaRetos.get(i));
+            for(int i = 0; i < listaRetos.size(); i++) {
+                System.out.println("[" + i + "] " + listaRetos.get(i));
             }
         }
     }
@@ -410,9 +421,8 @@ public class menuCliente {
     public static void marcarReto(Cliente cliente) {
         ArrayList<Reto> listaRetos = cliente.getRetos();
 
-        if (listaRetos.isEmpty()) {
-            System.out.println("No tienes retos añadidos");
-            return;
+        if(listaRetos.isEmpty()) {
+            throw new ListaEventosVacia();
         }
 
         verRetos(cliente);
@@ -421,25 +431,24 @@ public class menuCliente {
         int opc = sc.nextInt();
         sc.nextLine();
 
-        if (opc >= 0 && opc < listaRetos.size()) {
+        if(opc >= 0 && opc < listaRetos.size()) {
             Reto reto = listaRetos.get(opc);
-            if (reto.isCompletado()) {
+            if(reto.isCompletado()) {
                 System.out.println("Este reto ya está marcado como completado");
             } else {
                 cliente.completarReto(opc);
                 System.out.println("Reto marcado como completado");
             }
         } else {
-            System.out.println("Opción inválida");
+            throw new ListaEventosVacia();
         }
     }
 
     public static void eliminarReto(Cliente cliente) {
         ArrayList<Reto> listaRetos = cliente.getRetos();
 
-        if (listaRetos.isEmpty()) {
-            System.out.println("No tienes retos añadidos");
-            return;
+        if(listaRetos.isEmpty()) {
+            throw new ListaEventosVacia();
         }
 
         verRetos(cliente);
@@ -447,11 +456,11 @@ public class menuCliente {
         int opc = sc.nextInt();
         sc.nextLine();
 
-        if (opc >= 0 && opc < listaRetos.size()) {
+        if(opc >= 0 && opc < listaRetos.size()) {
             listaRetos.remove(opc);
             System.out.println("Reto eliminado");
         } else {
-            System.out.println("Opción inválida");
+            throw new ListaEventosVacia();
         }
     }
 
@@ -462,13 +471,12 @@ public class menuCliente {
     public static void verRecompensas(Cliente cliente) {
         ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
 
-        if (recompensas.isEmpty()) {
-            System.out.println("No hay recompensas disponibles en la tienda");
-            return;
+        if(recompensas.isEmpty()) {
+            throw new ListaRecompensasVacia();
         }
 
         System.out.println("Tienes: " + cliente.getPuntos() + " puntos");
-        for (Recompensa r : recompensas) {
+        for(Recompensa r : recompensas) {
             System.out.printf("* [%s] %s - Costo: %d puntos\n",
                     r.getTipo(), r.getNombre(), r.getCosto());
         }
@@ -480,14 +488,13 @@ public class menuCliente {
 
         ArrayList<Recompensa> recompensas = ControlArchivos.cargarRecompensas();
 
-        if (recompensas.isEmpty()) {
-            System.out.println("No hay recompensas para canjear");
-            return;
+        if(recompensas.isEmpty()) {
+            throw new ListaRecompensasVacia();
         }
 
         System.out.println("Tienes actualmente: " + cliente.getPuntos() + " puntos");
 
-        for (int i = 0; i < recompensas.size(); i++) {
+        for(int i = 0; i < recompensas.size(); i++) {
             Recompensa r = recompensas.get(i);
             System.out.printf("%d) [%s] %s - Costo: %d puntos\n",
                     i, r.getTipo(), r.getNombre(), r.getCosto());
@@ -496,14 +503,13 @@ public class menuCliente {
         System.out.println("Elige el número de la recompensa a canjear (o -1 para salir):");
         int opc = sc.nextInt();
 
-        if (opc < 0 || opc >= recompensas.size()) {
-            System.out.println("Selección inválida");
-            return;
+        if(opc < 0 || opc >= recompensas.size()) {
+            throw new IndiceNoPermitido();
         }
 
         Recompensa recompensaElegida = recompensas.get(opc);
 
-        if (cliente.getPuntos() >= recompensaElegida.getCosto()) {
+        if(cliente.getPuntos() >= recompensaElegida.getCosto()) {
 
             recompensaElegida.canjear(cliente);
 
