@@ -76,7 +76,7 @@ public class Sistema {
                     }
                 }
 
-                if (intentos > 0) {
+                if(intentos > 0) {
                     System.out.println("Intentos restantes: " + intentos + "\n");
                 }
 
