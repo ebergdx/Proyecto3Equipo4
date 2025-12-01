@@ -6,7 +6,7 @@ public class ObservadorEstadisticas implements ObservadorEventos {
     
     @Override
     public void eventoGenerado(EventoUsuario evento) {
-        switch (evento.getTipo()) {
+        switch(evento.getTipo()) {
             case EventoUsuario.habitoCompletado:
             case EventoUsuario.eventoTerminado:
             case EventoUsuario.retoCompletado:
@@ -17,7 +17,7 @@ public class ObservadorEstadisticas implements ObservadorEventos {
                 break;
         }
         
-        if (totalTareasCompletadas % 5 == 0) {
+        if(totalTareasCompletadas % 5 == 0) {
             System.out.println("Estadisticas: " + totalTareasCompletadas + 
                              " tareas completadas, " + totalPuntosRepartidos + " puntos repartidos");
         }

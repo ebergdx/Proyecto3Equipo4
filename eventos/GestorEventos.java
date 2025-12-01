@@ -12,7 +12,7 @@ public class GestorEventos {
     }
     
     public static GestorEventos getInstancia() {
-        if (instancia == null) {
+        if(instancia == null) {
             instancia = new GestorEventos();
         }
         return instancia;
@@ -27,7 +27,7 @@ public class GestorEventos {
     }
     
     public void notificarEvento(EventoUsuario evento) {
-        for (ObservadorEventos observador : observadores) {
+        for(ObservadorEventos observador : observadores) {
             observador.eventoGenerado(evento);
         }
     }
